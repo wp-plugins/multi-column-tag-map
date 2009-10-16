@@ -1,9 +1,11 @@
-== Description ==
+=== Multi-column Tag Map ===
+
+=== Description ===
 
 Multi-column Tag Map display a columnized, alphabetical and expandable listing of all tags used in your site. This makes it easier for visitors to quickly search for topics that might intrest them.  
 
 
-== Usage ==
+=== Usage ===
 
 Add this where you want the listing to appear.
 
@@ -11,7 +13,7 @@ Add this where you want the listing to appear.
 <?php wp_mcTagMap() ?>
 <?php endif; ?>
 
-== Customization ==
+=== Customization= ==
 
 Parameters: 
 
@@ -26,6 +28,6 @@ Example:
 <?php wp_mcTagMap('columns=4&hide=yes&num_show=5&more=See More') ?>
 <?php endif; ?>
 
-== Installation ==
+=== Installation ===
 
 Drop mcTagMap folder into /wp-content/plugins/ and activate the plug in the Wordpress admin area.
