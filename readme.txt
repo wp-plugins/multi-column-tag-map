@@ -39,7 +39,6 @@ Add this where you want the listing to appear.
 
 = Example =
 
-<code>
 `<?php if(function_exists('wp_mcTagMap')): ?>`
 `<?php wp_mcTagMap('columns=4&hide=yes&num_show=5&more=See More') ?>`
 `<?php endif; ?>`
