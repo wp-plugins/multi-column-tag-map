@@ -1,5 +1,5 @@
 === Multi-column Tag Map ===
-Contributors: tugbucket, tonywhite
+Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical
 Requires at least: 2.1
 Tested up to: 2.8
