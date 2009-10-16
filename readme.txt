@@ -53,7 +53,7 @@ none
 
 == Screenshots ==
 
-1. `/trunk/mctagmap-2col.gif`
-2. `/trunk/mctagmap-4col.gif`
+1. `/mctagmap-2col.gif`
+2. `/mctagmap-4col.gif`
 
 == Changelog ==
