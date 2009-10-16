@@ -30,12 +30,12 @@ Add this where you want the listing to appear.
 `<?php endif; ?>`
 
 
-= Parameters = 
+= Defaults = 
 
-columns (1-5) - default: 2
-more (the .more link text) - default: "View more"
-hide (yes or no) - default: no
-num_show (how many to show before displaying the more link) - default: 5
+* columns = 2
+* more = View more
+* hide = no
+* num_show = 5
 
 = Example =
 
