@@ -53,7 +53,7 @@ none
 
 == Screenshots ==
 
-1. `/mctagmap-2col.gif`
-2. `/mctagmap-4col.gif`
+1. Default view.`/trunk/screenshot-1.gif`
+2. Four columns with hiding. `/trunk/screenshot-2.gif`
 
 == Changelog ==
