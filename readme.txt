@@ -25,11 +25,10 @@ Drop mcTagMap folder into /wp-content/plugins/ and activate the plug in the Word
 
 Add this where you want the listing to appear.
 
-<code>
-&lt;?php if(function_exists('wp_mcTagMap')): ?>
-&lt;?php wp_mcTagMap() ?>
-&lt;?php endif; ?>
-</code>
+`<?php if(function_exists('wp_mcTagMap')): ?>`
+`<?php wp_mcTagMap() ?>`
+`<?php endif; ?>`
+
 
 = Parameters = 
 
@@ -41,10 +40,10 @@ num_show (how many to show before displaying the more link) - default: 5
 = Example =
 
 <code>
-&lt;?php if(function_exists('wp_mcTagMap')): ?>
-&lt;?php wp_mcTagMap('columns=4&hide=yes&num_show=5&more=See More') ?>
-&lt;?php endif; ?>
-</code>
+`<?php if(function_exists('wp_mcTagMap')): ?>`
+`<?php wp_mcTagMap('columns=4&hide=yes&num_show=5&more=See More') ?>`
+`<?php endif; ?>`
+
 
 = Note =
 You must have jQuery in order to use the show/hide feature 
