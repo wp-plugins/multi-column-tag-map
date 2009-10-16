@@ -16,7 +16,7 @@ Multi-column Tag Map display a columnized, alphabetical and expandable listing o
 * Display tags in one to five columns
 * The initial amount of tags from each letter, can be limited
 * jQuery Show/Hide effect 
-* Customizable "show mre" link 
+* Customizable "show more" link 
 
 
 == Installation ==
