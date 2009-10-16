@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Multi-column Tag Map 
-Plugin URI: http://tugbucket.net
+Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Builds a columnized, alphabetized and expandable list of tags
 Version: 1.0
 Author: Alan Jackson
