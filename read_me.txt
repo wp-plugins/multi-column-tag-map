@@ -1,4 +1,5 @@
 === Multi-column Tag Map ===
+Contributors: tonywhite
 Tags: tags, lists, expandable, column
 Tested up to: 2.8
 
