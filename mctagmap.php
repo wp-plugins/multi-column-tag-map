@@ -234,7 +234,7 @@ print $list ;
 add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS()
 {
-echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/mcTagMap/mctagmap.css" type="text/css" media="screen" />';
+echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
 echo "\n\n";
 echo "<script type=\"text/javascript\">
 $(document).ready(function() { 
