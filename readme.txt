@@ -59,4 +59,4 @@ none
 == Changelog ==
 
 * v1.2 - Updated the plugin PHP to correct the CSS path.
-* v1.3 - Fixed a conflict in jQuery for the show/hide to work.
+* v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
