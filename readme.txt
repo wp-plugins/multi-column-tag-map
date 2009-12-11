@@ -3,7 +3,7 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical
 Requires at least: 2.1
 Tested up to: 2.8
-Stable tag: 1.3.1
+Stable tag: 1.4
 
 Multi-column Tag Map display a columnized, alphabetical and expandable listing of all tags used in your site.
 
@@ -43,6 +43,10 @@ Add this where you want the listing to appear.
 `<?php wp_mcTagMap('columns=4&hide=yes&num_show=5&more=See More') ?>`
 `<?php endif; ?>`
 
+== Shortcode Installation ==
+
+[mctagmap columns="3" more="more!" hide="yes" num_show="4"]
+
 
 = Note =
 You must have jQuery in order to use the show/hide feature 
@@ -60,3 +64,4 @@ none
 
 * v1.2 - Updated the plugin PHP to correct the CSS path.
 * v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
+* v1.4 - Added shortcode functionality
