@@ -64,4 +64,4 @@ none
 
 * v1.2 - Updated the plugin PHP to correct the CSS path.
 * v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
-* v1.4 - Added shortcode functionality
+* v2.0 - Added shortcode functionality
