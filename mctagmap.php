@@ -71,7 +71,7 @@ function wp_mcTagMap($options='') {
 	}
 	
     $list = '<!-- begin list --><div id="mcTagMap">';
-	$tags = get_terms('post_tag' );
+	$tags = get_terms('post_tag', 'order=ASC' ); // new code!
 	$groups = array();
 	if( $tags && is_array( $tags ) ) {
 		foreach( $tags as $tag ) {
@@ -297,7 +297,7 @@ function sc_mcTagMap($atts, $content = null) {
 */
 
     $list = '<!-- begin list --><div id="sc_mcTagMap">';
-	$tags = get_terms('post_tag' );
+	$tags = get_terms('post_tag', 'order=ASC' ); // new code!
 	$groups = array();
 	if( $tags && is_array( $tags ) ) {
 		foreach( $tags as $tag ) {
@@ -404,6 +404,7 @@ function sc_mcTagMap($atts, $content = null) {
 		$url = attribute_escape( get_tag_link( $tag->term_id ) );
 		$name = apply_filters( 'the_title', $tag->name );
 	//	$name = ucfirst($name);
+
 		$i++;
 		if ($hide == "yes"){
 		$num2show = $num_show;
@@ -424,7 +425,8 @@ function sc_mcTagMap($atts, $content = null) {
 			$list .="\n";
 		}		
 		
-	} 		 
+	} 
+		 
 	$list .= '</ul>';
 	$list .="\n";
 	$list .= '</div>';
@@ -453,7 +455,7 @@ function sc_mcTagMap($atts, $content = null) {
 		}
 	else $list .= '<p>Sorry, but no tags were found</p>';
 
-print $list ;
+print $list;
 
 }
 
