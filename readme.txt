@@ -3,7 +3,7 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical
 Requires at least: 2.1
 Tested up to: 2.9.1
-Stable tag: 2.1
+Stable tag: 2.2
 
 Multi-column Tag Map display a columnized, alphabetical and expandable listing of all tags used in your site.
 
@@ -66,3 +66,4 @@ none
 * v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
 * v2.0 - Added shortcode functionality.
 * v2.1 - Fixed a sorting coflict with the deafults.
+* v2.2 - Fixed shorcode placement issue.
