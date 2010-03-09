@@ -43,12 +43,12 @@ The first method uses the standard '&' dilemeter. This method does not allow for
 
 The second method uses the vertical pipe '|' as a dilemeter thus allowing the use of special characters:
 
-`<?php wp_mcTagMap('columns=3|hide=yes|num_show=10|more=more &#187;|toggle=&#171; less|show_empty=yes') ?>`
+`<?php wp_mcTagMap('columns=3|hide=yes|num_show=10|more=more &amp;#187;|toggle=&amp;#171; less|show_empty=yes') ?>`
 
 
 = Shortcode Installation =
 
-`[mctagmap columns="3" more="more &#187;" hide="no" num_show="4" toggle="&#171;" show_empty="yes"]`
+`[mctagmap columns="3" more="more &amp#187;" hide="no" num_show="4" toggle="&amp;#171;" show_empty="yes"]`
 
 
 = Defaults = 
