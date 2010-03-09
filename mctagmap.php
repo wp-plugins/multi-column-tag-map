@@ -2,8 +2,8 @@
 /*
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
-Description: Multi-column Tag Map display a columnized, alphabetical and expandable listing of all tags used in your site.
-Version: 2.2
+Description: Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site.
+Version: 3.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -34,10 +34,15 @@ function wp_mcTagMap($options='') {
                     "more" => "View More",
 					"hide" => "no",
 					"num_show" => "5",
+					"toggle" => "no",
+					"show_empty" => "yes",
                    );
-
-				   
+			
+	if(strpos($options, '|')) {		   
+	$options = explode("|",$options);
+	} else {
 	$options = explode("&",$options);
+	}
 	
 	foreach ($options as $option) {
 	
@@ -53,7 +58,7 @@ function wp_mcTagMap($options='') {
 	}
 	
     if ($options['more']) {
-	$ns_options['more'] = $options['more'];
+	$ns_options['more'] = htmlentities($options['more'], ENT_QUOTES);
 	} else {
 	$options['more'] = "View more";
 	}
@@ -70,8 +75,27 @@ function wp_mcTagMap($options='') {
 	$options['num_show'] = 5;
 	}
 	
+	if ($options['toggle']) {
+	$ns_options['toggle'] = $options['toggle'];
+	} else {
+	$options['toggle'] = "no";
+	}
+	
+	if ($options['show_empty']) {
+	$ns_options['show_empty'] = $options['show_empty'];
+	} else {
+	$options['show_empty'] = "yes";
+	}
+	
+	$show_empty = $options['show_empty'];
+	if($show_empty == "yes"){
+		$show_empty = "0";
+	}
+	if($show_empty == "no"){
+		$show_empty = "1";
+	}
     $list = '<!-- begin list --><div id="mcTagMap">';
-	$tags = get_terms('post_tag', 'order=ASC' ); // new code!
+	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
 	$groups = array();
 	
 	
@@ -182,14 +206,17 @@ function wp_mcTagMap($options='') {
 		$name = apply_filters( 'the_title', $tag->name );
 	//	$name = ucfirst($name);
 		$i++;
+		$counti = $i;
 		if ($options['hide'] == "yes"){
 		$num2show = $options['num_show'];
 		$num2show1 = ($options['num_show'] +1);
+		$toggle = ($options['toggle']);
+		
 		if ($i != 0 and $i <= $num2show) {
 			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
 			$list .="\n";
 			}
-		if ($i > $num2show && $i == $num2show1)  {
+		if ($i > $num2show && $i == $num2show1 && $toggle == "no") {
 			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$options['more']."</a>"."</li>"."\n";
 			}
 		if ($i >= $num2show1){
@@ -199,9 +226,12 @@ function wp_mcTagMap($options='') {
 		} else {
 			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
 			$list .="\n";
-		}		
+		}	
 		
-	} 		 
+	} 
+		if ($options['hide'] == "yes" && $toggle != "no" && $i == $counti && $i > $num2show) {
+			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$options['more']."</a>"."<a href=\"#x\" class=\"less\">".$options['toggle']."</a>"."</li>"."\n";
+		}	 
 	$list .= '</ul>';
 	$list .="\n";
 	$list .= '</div>';
@@ -233,74 +263,32 @@ function wp_mcTagMap($options='') {
 print $list ;
 
 }
+// end long code
 
-add_action('wp_head', 'mcTagMapCSSandJS');
-function mcTagMapCSSandJS()
-{
-echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
-echo "\n\n";
-echo "<script type=\"text/javascript\">
-jQuery(document).ready(function() { 
-  jQuery('ul.links li.hideli').hide();
-  jQuery('ul.links li.morelink').show();
-  jQuery('a.more').click(function() {
-	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
-	 jQuery(this).parent('li.morelink').remove();
-  });
-});
-</script>\n\n";
-}
 
 // short code begins
-
 function sc_mcTagMap($atts, $content = null) {
         extract(shortcode_atts(array(
                     "columns" => "2",
                     "more" => "View More",
 					"hide" => "no",
 					"num_show" => "5",
+					"toggle" => "no",
+					"show_empty" => "yes",
         ), $atts));
 
 				   
-/*	
-	$options = explode("&",$options);
-	
-	foreach ($options as $option) {
-	
-		$parts = explode("=",$option);
-		$options[$parts[0]] = $parts[1];
-	
+
+	if($show_empty == "yes"){
+		$show_empty = "0";
+	}
+	if($show_empty == "no"){
+		$show_empty = "1";
 	}
 
 
-	if ($options['columns']) {
-	$ns_options['columns'] = $options['columns'];
-	} else {
-	$options['columns'] = 2;
-	}
-	
-    if ($options['more']) {
-	$ns_options['more'] = $options['more'];
-	} else {
-	$options['more'] = "View more";
-	}
-	
-    if ($options['hide']) {
-	$ns_options['hide'] = $options['hide'];
-	} else {
-	$options['hide'] = "no";
-	}
-	
-    if ($options['num_show']) {
-	$ns_options['num_show'] = $options['num_show'];
-	} else {
-	$options['num_show'] = 5;
-	}
-	
-*/
-
-    $list = '<!-- begin list --><div id="sc_mcTagMap">';
-	$tags = get_terms('post_tag', 'order=ASC' ); // new code!
+    $list = '<!-- begin list --><div id="mcTagMap">';
+	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
 	$groups = array();
 	if( $tags && is_array( $tags ) ) {
 		foreach( $tags as $tag ) {
@@ -409,14 +397,16 @@ function sc_mcTagMap($atts, $content = null) {
 	//	$name = ucfirst($name);
 
 		$i++;
+		$counti = $i;
 		if ($hide == "yes"){
 		$num2show = $num_show;
 		$num2show1 = ($num_show +1);
+		//$toggle = ($options['toggle']);
 		if ($i != 0 and $i <= $num2show) {
 			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
 			$list .="\n";
 			}
-		if ($i > $num2show && $i == $num2show1)  {
+		if ($i > $num2show && $i == $num2show1 && $toggle == "no") {
 			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$more."</a>"."</li>"."\n";
 			}
 		if ($i >= $num2show1){
@@ -428,7 +418,10 @@ function sc_mcTagMap($atts, $content = null) {
 			$list .="\n";
 		}		
 		
-	} 
+	}
+		if ($hide == "yes" && $toggle != "no" && $i == $counti && $i > $num2show) {
+			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$more."</a>"."<a href=\"#x\" class=\"less\">".$toggle."</a>"."</li>"."\n";
+		}	 
 		 
 	$list .= '</ul>';
 	$list .="\n";
@@ -463,5 +456,48 @@ return $list;
 }
 
 add_shortcode("mctagmap", "sc_mcTagMap");
+// end shortcode
+
+
+// the JS and CSS
+add_action('wp_head', 'mcTagMapCSSandJS');
+function mcTagMapCSSandJS()
+{
+if ($toggle == "no"){
+echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
+echo "\n\n";
+echo "<script type=\"text/javascript\">
+jQuery(document).ready(function() { 
+  jQuery('ul.links li.hideli').hide();
+  jQuery('ul.links li.morelink').show();
+  jQuery('a.more').click(function() {
+	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
+	 jQuery(this).parent('li.morelink').remove();
+  });
+});
+</script>\n\n";
+}
+if ($toggle != "no"){
+echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
+echo "\n\n";
+echo "<script type=\"text/javascript\">
+jQuery(document).ready(function() { 
+  jQuery('a.less').hide();
+  jQuery('ul.links li.hideli').hide();
+  jQuery('ul.links li.morelink').show();
+  jQuery('a.more').click(function() {
+	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
+	 jQuery(this).parent('li.morelink').children('a.less').show();
+	 jQuery(this).hide();
+  });
+    jQuery('a.less').click(function() {
+	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
+	 jQuery(this).parent('li.morelink').children('a.more').show();
+	 jQuery(this).hide();
+  });
+});
+</script>\n\n";
+}
+}
 
 ?>
