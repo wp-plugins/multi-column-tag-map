@@ -100,3 +100,4 @@ none
 * v3.0 - Added toggleability to the lists, the ability to show empty posts and the ability to use special characters in the links.
 * v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
 * v4.0.1 - Typos
+* v4.1 - oops
