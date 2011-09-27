@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site.
-Version: 4.0.1
+Version: 4.1
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
