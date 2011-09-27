@@ -1,11 +1,11 @@
 === Multi-column Tag Map ===
 Contributors: tugbucket
-Tags: tags, lists, expandable, column, alphabetical, toggleable, site amp
+Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
-Tested up to: 2.9.1
-Stable tag: 3.0
+Tested up to: 3.2
+Stable tag: 4.0
 
-Multi-column Tag Map display a columnized, alphabetical and expandable listing of all tags used in your site.
+Multi-column Tag Map displays a columnized, alphabetical and expandable listing of all tags used in your site.
 
 == Description ==
 
@@ -21,11 +21,14 @@ Multi-column Tag Map display a columnized, alphabetical, expandable and toggleab
 * Customizable "show less" link
 * Can show tags with no posts related to them
 * Can show tags belonging to private posts
+* Optionally list tags of peoples names last name first
 
 
 == Installation ==
 
 Unzip the 'mcTagMap' folder into '/wp-content/plugins/' and activate the plug in the Wordpress admin area.
+
+= Hardcode Installation **deprecated since verion 4.0** =
 
 You can hardcode this into your themes' PHP files like so:
 
@@ -45,10 +48,12 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 
 `<?php wp_mcTagMap('columns=3|hide=yes|num_show=10|more=more &amp;#187;|toggle=&amp;#171; less|show_empty=yes') ?>`
 
+**NOTE:** As of version 4.0, only the shortcode installation will be supported.
+
 
 = Shortcode Installation =
 
-`[mctagmap columns="3" more="more &amp#187;" hide="no" num_show="4" toggle="&amp;#171;" show_empty="yes"]`
+`[mctagmap columns="3" more="more &amp#187;" hide="no" num_show="4" toggle="&amp;#171;" show_empty="yes" name_divider="|"]`
 
 
 = Defaults = 
@@ -59,6 +64,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * more = View more
 * toggle = no (possible values: 'YOUR TEXT' or no)
 * show_empty = no (possible values: yes or no)
+* name_divider = |
 
 = Explanation of options =
 
@@ -68,6 +74,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * more: This will be the text of the link to dispaly more links. Only visible if 'hide' is set to 'yes' and 'num_show' is less than the total number of tags shown in each list.
 * toggle: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
 * show_empty: If set to 'yes', this will display tags in the lists that currenlty do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking th elink will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
+* name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.  
 
 
 = Note =
@@ -91,3 +98,4 @@ none
 * v2.1 - Fixed a sorting coflict with the deafults.
 * v2.2 - Fixed shorcode placement issue.
 * v3.0 - Added toggleability to the lists, the ability to show empty posts and the ability to use special characters in the links.
+* v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
