@@ -73,7 +73,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * num_show: This tells the plug-in how many list items to show on page load.
 * more: This will be the text of the link to dispaly more links. Only visible if 'hide' is set to 'yes' and 'num_show' is less than the total number of tags shown in each list.
 * toggle: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
-* show_empty: If set to 'yes', this will display tags in the lists that currenlty do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking th elink will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
+* show_empty: If set to 'yes', this will display tags in the lists that currently do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking the link will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
 * name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.  
 
 
@@ -89,7 +89,7 @@ Currently the plugin only works in english. If someone would like to help transl
 
 = Does the plugin work in [insert theme name]? =
 
-mctagmap does nothign to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shuldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the heirarchy of your themes CSS but, that can be changed by editing the mctagmap.css in the plugins folder.
+mctagmap does nothing to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shouldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the hierarchy of your themes CSS but, that can be changed by editing the mctagmap.css in the plugins folder.
 
 
 == Screenshots ==
@@ -102,7 +102,7 @@ mctagmap does nothign to the core functions of Wordpress. There should be no rea
 * v1.2 - Updated the plugin PHP to correct the CSS path.
 * v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
 * v2.0 - Added shortcode functionality.
-* v2.1 - Fixed a sorting coflict with the deafults.
+* v2.1 - Fixed a sorting coflict with the defaults.
 * v2.2 - Fixed shorcode placement issue.
 * v3.0 - Added toggleability to the lists, the ability to show empty posts and the ability to use special characters in the links.
 * v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
