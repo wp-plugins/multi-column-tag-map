@@ -3,7 +3,7 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
-Stable tag: 4.1
+Stable tag: 4.2
 
 Multi-column Tag Map displays a columnized, alphabetical and expandable listing of all tags used in your site.
 
@@ -83,7 +83,14 @@ You must be using jQuery in order to use the show/hide feature
 
 == Frequently Asked Questions ==
 
-none
+= The plugin doesn't work correctly in [non-english] language, can you fix it? =
+
+Currently the plugin only works in english. If someone would like to help translate it into another language, it would be appreciated.
+
+= Does the plugin work in [insert theme name]? =
+
+mctagmap does nothign to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shuldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the heirarchy of your themes CSS but, that can be changed by editing the mctagmap.css in the plugins folder.
+
 
 == Screenshots ==
 
@@ -101,3 +108,4 @@ none
 * v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
 * v4.0.1 - Typos
 * v4.1 - oops
+* v4.2 - Fixed function conflict and added to teh FAQ
