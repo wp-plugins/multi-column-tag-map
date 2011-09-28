@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site.
-Version: 5.0
+Version: 5.1
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -24,8 +24,6 @@ Author URI: http://tugbucket.net
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
-
 
 function wp_mcTagMap($options='') {
 
@@ -293,8 +291,7 @@ function sc_mcTagMap($atts, $content = null) {
 	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
 	$groups = array();
 	if( $tags && is_array( $tags ) ) {
-		foreach( $tags as $tag ) {
-		
+		foreach( $tags as $tag ) {		
 			// added 09.02.11
 			if (strlen(strstr($tag->name, $name_divider))>0) {
  				$tag->name = preg_replace("/\s*([\\".$name_divider."])\s*/", "$1", $tag->name);
@@ -411,6 +408,12 @@ function sc_mcTagMap($atts, $content = null) {
 	uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
 		
 	foreach( $tags as $tag ) {
+	
+		// added 9.28.11
+		if($tag_count == "yes"){
+			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
+		}
+		
 		$url = attribute_escape( get_tag_link( $tag->term_id ) );
 		$name = apply_filters( 'the_title', $tag->name );
 		//$name = ucfirst($name);
@@ -420,11 +423,6 @@ function sc_mcTagMap($atts, $content = null) {
 		$num2show = $num_show;
 		$num2show1 = ($num_show +1);
 		//$toggle = ($options['toggle']);
-		
-		// added 9.28.11
-		if($tag_count == 'yes'){
-			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
-		}
 		
 		if ($i != 0 and $i <= $num2show) {
 			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>'. $mctagmap_count .'</li>';
@@ -498,10 +496,13 @@ add_filter( 'plugin_row_meta', 'mctagmap_donate', 10, 2 );
 add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS()
 {
+
+$VersionNumber = "5.1";
+
 if ($toggle == "no"){
 echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
 echo "\n";
-echo "<!-- mctagmap by tugbucket -->";
+echo "<!-- mctagmap by tugbucket ". $VersionNumber ." -->";
 echo "\n";
 echo "<script type=\"text/javascript\">
 jQuery(document).ready(function() { 
@@ -517,7 +518,7 @@ jQuery(document).ready(function() {
 if ($toggle != "no"){
 echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
 echo "\n";
-echo "<!-- mctagmap by tugbucket -->";
+echo "<!-- mctagmap by tugbucket ". $VersionNumber ." -->";
 echo "\n";
 echo "<script type=\"text/javascript\">
 jQuery(document).ready(function() { 

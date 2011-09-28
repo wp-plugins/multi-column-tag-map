@@ -3,7 +3,7 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
-Stable tag: 5.0
+Stable tag: 5.1
 
 Multi-column Tag Map displays a columnized, alphabetical and expandable listing of all tags used in your site.
 
@@ -112,3 +112,4 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 * v4.1 - oops
 * v4.2 - Fixed function conflict and added to the FAQ 
 * v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option
+* v5.1 - cleaned up the tag_count function
