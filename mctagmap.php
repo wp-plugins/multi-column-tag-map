@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site.
-Version: 4.2
+Version: 5.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -276,6 +276,7 @@ function sc_mcTagMap($atts, $content = null) {
 					"toggle" => "no",
 					"show_empty" => "yes",
 					"name_divider" => "|", // added 09.02.11
+					"tag_count" => "no",
         ), $atts));
 
 				   
@@ -419,19 +420,25 @@ function sc_mcTagMap($atts, $content = null) {
 		$num2show = $num_show;
 		$num2show1 = ($num_show +1);
 		//$toggle = ($options['toggle']);
+		
+		// added 9.28.11
+		if($tag_count == 'yes'){
+			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
+		}
+		
 		if ($i != 0 and $i <= $num2show) {
-			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
+			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>'. $mctagmap_count .'</li>';
 			$list .="\n";
 			}
 		if ($i > $num2show && $i == $num2show1 && $toggle == "no") {
 			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$more."</a>"."</li>"."\n";
 			}
 		if ($i >= $num2show1){
-               $list .= '<li class="hideli"><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
+               $list .= '<li class="hideli"><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . '</li>';
 			   $list .="\n";
 		}
 		} else {
-			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
+			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . '</li>';
 			$list .="\n";
 		}		
 		
@@ -530,6 +537,27 @@ jQuery(document).ready(function() {
 });
 </script>\n\n";
 }
+}
+
+// overwrite single_tag_title()
+add_filter('single_tag_title', 'mctagmap_single_tag_title', 1, 2);
+function mctagmap_single_tag_title($prefix = '') {
+	global $wp_query;
+	if ( !is_tag() )
+		return;
+
+	$tag = $wp_query->get_queried_object();
+
+	if ( ! $tag )
+		return;
+
+	$my_tag_name = str_replace('|', '', $tag->name);
+	if ( !empty($my_tag_name) ) {
+		if ( $display )
+			echo $prefix . $my_tag_name;
+		else
+			return $my_tag_name;
+	}
 }
 
 ?>

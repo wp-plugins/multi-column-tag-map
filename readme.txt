@@ -3,7 +3,7 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
-Stable tag: 4.2
+Stable tag: 5.0
 
 Multi-column Tag Map displays a columnized, alphabetical and expandable listing of all tags used in your site.
 
@@ -22,6 +22,7 @@ Multi-column Tag Map display a columnized, alphabetical, expandable and toggleab
 * Can show tags with no posts related to them
 * Can show tags belonging to private posts
 * Optionally list tags of peoples names last name first
+* Can display the number of posts that share a tag
 
 
 == Installation ==
@@ -53,7 +54,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 
 = Shortcode Installation =
 
-`[mctagmap columns="3" more="more &amp#187;" hide="no" num_show="4" toggle="&amp;#171;" show_empty="yes" name_divider="|"]`
+`[mctagmap columns="3" more="more &amp#187;" hide="no" num_show="4" toggle="&amp;#171;" show_empty="yes" name_divider="|" tag_count="yes"]`
 
 
 = Defaults = 
@@ -65,6 +66,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * toggle = no (possible values: 'YOUR TEXT' or no)
 * show_empty = no (possible values: yes or no)
 * name_divider = |
+* tag_count = no (possible values: yes or no)
 
 = Explanation of options =
 
@@ -74,7 +76,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * more: This will be the text of the link to dispaly more links. Only visible if 'hide' is set to 'yes' and 'num_show' is less than the total number of tags shown in each list.
 * toggle: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
 * show_empty: If set to 'yes', this will display tags in the lists that currently do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking the link will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
-* name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.  
+* name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.* tag_count: If this option is set to "yes", the number of posts that share that tag will be displayed like "(3)". The count is wrapped in a span with a class of "mctagmap_count" so that the count can be styled individually in the CSS if desired. 
 
 
 = Note =
@@ -109,3 +111,4 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 * v4.0.1 - Typos
 * v4.1 - oops
 * v4.2 - Fixed function conflict and added to the FAQ 
+* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option.
