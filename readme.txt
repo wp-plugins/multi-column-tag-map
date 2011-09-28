@@ -108,4 +108,4 @@ mctagmap does nothign to the core functions of Wordpress. There should be no rea
 * v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
 * v4.0.1 - Typos
 * v4.1 - oops
-* v4.2 - Fixed function conflict and added to teh FAQ
+* v4.2 - Fixed function conflict and added to the FAQ 
