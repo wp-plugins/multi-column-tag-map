@@ -111,4 +111,4 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 * v4.0.1 - Typos
 * v4.1 - oops
 * v4.2 - Fixed function conflict and added to the FAQ 
-* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option.
+* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option
