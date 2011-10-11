@@ -79,7 +79,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * toggle: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
 * show_empty: If set to 'yes', this will display tags in the lists that currently do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking the link will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
 * name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.* tag_count: If this option is set to "yes", the number of posts that share that tag will be displayed like "(3)". The count is wrapped in a span with a class of "mctagmap_count" so that the count can be styled individually in the CSS if desired. 
-*exclude: A coma seperated, case sensitive list of the tags you do not wish to appear in the lists.
+* exclude: A coma seperated, case sensitive list of the tags you do not wish to appear in the lists.
 
 = Note =
 You must be using jQuery in order to use the show/hide feature 
