@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site.
-Version: 5.1
+Version: 6.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -275,6 +275,7 @@ function sc_mcTagMap($atts, $content = null) {
 					"show_empty" => "yes",
 					"name_divider" => "|", // added 09.02.11
 					"tag_count" => "no",
+					"exclude" => "",
         ), $atts));
 
 				   
@@ -289,9 +290,22 @@ function sc_mcTagMap($atts, $content = null) {
 
     $list = '<!-- begin list --><div id="mcTagMap">';
 	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
+
+	/* exclude tags */	
+	foreach($tags as $tag){
+		$fl = mb_substr($tag->name,0,1);
+		$ll = mb_substr($tag->name,1);
+		$tag->name = $fl.$ll;
+		if (preg_match('/(?<=^|[^\p{L}])' . preg_quote($tag->name,'/') . '(?=[^\p{L}]|$)/ui', $exclude)) {
+			unset($tag->name);
+		}
+	}
+	
 	$groups = array();
 	if( $tags && is_array( $tags ) ) {
-		foreach( $tags as $tag ) {		
+		foreach( $tags as $tag ) {	
+		/* exclude tags */
+		if(isset($tag->name)){	
 			// added 09.02.11
 			if (strlen(strstr($tag->name, $name_divider))>0) {
  				$tag->name = preg_replace("/\s*([\\".$name_divider."])\s*/", "$1", $tag->name);
@@ -299,11 +313,10 @@ function sc_mcTagMap($atts, $content = null) {
 				$tag->name = $tagParts[1].', '.$tagParts[0];
 			}
 			
-			$first_letter = strtoupper( $tag->name[0] );
-			//$first_letter = $tag->name[0];
-			//echo $first_letter.', ';
+			$first_letter = mb_strtoupper( mb_substr($tag->name,0,1) ); /* Thanks to Birgir Erlendsson */
 			$groups[ $first_letter ][] = $tag;
 			ksort($groups);
+		}
 		}
 	if( !empty ( $groups ) ) {	
 		$count = 0;
@@ -408,7 +421,8 @@ function sc_mcTagMap($atts, $content = null) {
 	uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
 		
 	foreach( $tags as $tag ) {
-	
+		/* exclude tags */
+		if(isset($tag->name)){
 		// added 9.28.11
 		if($tag_count == "yes"){
 			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
@@ -438,7 +452,8 @@ function sc_mcTagMap($atts, $content = null) {
 		} else {
 			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . '</li>';
 			$list .="\n";
-		}		
+		}	
+		}	
 		
 	}
 		if ($hide == "yes" && $toggle != "no" && $i == $counti && $i > $num2show) {
@@ -497,7 +512,7 @@ add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS()
 {
 
-$VersionNumber = "5.1";
+$VersionNumber = "6.0";
 
 if ($toggle == "no"){
 echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';

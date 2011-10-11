@@ -3,7 +3,7 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
-Stable tag: 5.1
+Stable tag: 6.0
 
 Multi-column Tag Map displays a columnized, alphabetical and expandable listing of all tags used in your site.
 
@@ -23,6 +23,7 @@ Multi-column Tag Map display a columnized, alphabetical, expandable and toggleab
 * Can show tags belonging to private posts
 * Optionally list tags of peoples names last name first
 * Can display the number of posts that share a tag
+* Can exclude tags you do not want to appear in the lists
 
 
 == Installation ==
@@ -67,6 +68,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * show_empty = no (possible values: yes or no)
 * name_divider = |
 * tag_count = no (possible values: yes or no)
+* exclude = 
 
 = Explanation of options =
 
@@ -77,7 +79,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * toggle: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
 * show_empty: If set to 'yes', this will display tags in the lists that currently do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking the link will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
 * name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.* tag_count: If this option is set to "yes", the number of posts that share that tag will be displayed like "(3)". The count is wrapped in a span with a class of "mctagmap_count" so that the count can be styled individually in the CSS if desired. 
-
+*exclude: A coma seperated, case sensitive list of the tags you do not wish to appear in the lists.
 
 = Note =
 You must be using jQuery in order to use the show/hide feature 
@@ -87,7 +89,7 @@ You must be using jQuery in order to use the show/hide feature
 
 = The plugin doesn't work correctly in [non-english] language, can you fix it? =
 
-Currently the plugin only works in english. If someone would like to help translate it into another language, it would be appreciated.
+Currently the plugin only displays and groups non-English words. It does not sort these words alphabetically. If someone would like to help translate it into another language, it would be appreciated.
 
 = Does the plugin work in [insert theme name]? =
 
@@ -96,8 +98,7 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 
 == Screenshots ==
 
-1. Default view.`/trunk/screenshot-1.gif`
-2. Four columns with hiding. `/trunk/screenshot-2.gif`
+1. Using all options view. `/trunk/screenshot-1.gif`
 
 == Changelog ==
 
@@ -113,3 +114,4 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 * v4.2 - Fixed function conflict and added to the FAQ 
 * v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option
 * v5.1 - cleaned up the tag_count function
+* v6.0 - Added language display support and the ability to exclude tags
