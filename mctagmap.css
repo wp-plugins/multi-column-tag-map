@@ -38,7 +38,7 @@ margin: 0 0 0 0;
 display: none; 
 }
 
-#mcTagMap .holdleft .tagDescription {
+#mcTagMap .tagDescription {
 display: block; 
 font-size: 90%;
 line-height: 1;
