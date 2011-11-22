@@ -2,8 +2,8 @@
 /*
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
-Description: Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site.
-Version: 6.0.2
+Description: Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
+Version: 7.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -276,15 +276,20 @@ function sc_mcTagMap($atts, $content = null) {
 					"name_divider" => "|", // added 09.02.11
 					"tag_count" => "no",
 					"exclude" => "",
+					"descriptions" => "no",
+					"width" => "",
         ), $atts));
-
-				   
-
+   
+   
 	if($show_empty == "yes"){
 		$show_empty = "0";
 	}
 	if($show_empty == "no"){
 		$show_empty = "1";
+	}
+	
+	if($width){
+		$tug_width = "style=\"width: ". $width ."px;\"";
 	}
 
 
@@ -368,10 +373,10 @@ function sc_mcTagMap($atts, $content = null) {
 			if ($columns == 2){
 			if ($count == 0 || $count == $firstrow || $count ==  $secondrow) { 
 			    if ($count == $firstrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
+				$list .= "\n<div class='holdleft noMargin' ". $tug_width .">\n";
 				$list .="\n";
 				} else {
-				$list .= "\n<div class='holdleft'>\n";
+				$list .= "\n<div class='holdleft' ". $tug_width .">\n";
 				$list .="\n";
 				}
 				}
@@ -379,10 +384,10 @@ function sc_mcTagMap($atts, $content = null) {
 			if ($columns == 3){
 			if ($count == 0 || $count == $firstrow || $count ==  $secondrow) { 
 			    if ($count == $secondrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
+				$list .= "\n<div class='holdleft noMargin' ". $tug_width .">\n";
 				$list .="\n";
 				} else {
-				$list .= "\n<div class='holdleft'>\n";
+				$list .= "\n<div class='holdleft' ". $tug_width .">\n";
 				$list .="\n";
 				}
 				}
@@ -390,10 +395,10 @@ function sc_mcTagMap($atts, $content = null) {
 			if ($columns == 4){				
 			if ($count == 0 || $count == $firstrow || $count ==  $secondrow || $count == $thirdrow) { 
 			    if ($count == $thirdrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
+				$list .= "\n<div class='holdleft noMargin' ". $tug_width .">\n";
 				$list .="\n";
 				} else {
-				$list .= "\n<div class='holdleft'>\n";
+				$list .= "\n<div class='holdleft' ". $tug_width .">\n";
 				$list .="\n";
 				}
 				}
@@ -401,10 +406,10 @@ function sc_mcTagMap($atts, $content = null) {
 			if ($columns == 5){
 			if ($count == 0 || $count == $firstrow || $count ==  $secondrow || $count == $thirdrow || $count == $fourthrow ) { 
 			    if ($count == $fourthrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
+				$list .= "\n<div class='holdleft noMargin' ". $tug_width .">\n";
 				$list .="\n";
 				} else {
-				$list .= "\n<div class='holdleft'>\n";
+				$list .= "\n<div class='holdleft' ". $tug_width .">\n";
 				$list .="\n";
 				}
 				}
@@ -430,6 +435,9 @@ function sc_mcTagMap($atts, $content = null) {
 		
 		$url = attribute_escape( get_tag_link( $tag->term_id ) );
 		$name = apply_filters( 'the_title', $tag->name );
+		if($descriptions == "yes"){
+			$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
+		}
 		//$name = ucfirst($name);
 		$i++;
 		$counti = $i;
@@ -439,18 +447,18 @@ function sc_mcTagMap($atts, $content = null) {
 		//$toggle = ($options['toggle']);
 		
 		if ($i != 0 and $i <= $num2show) {
-			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>'. $mctagmap_count .'</li>';
+			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>'. $mctagmap_count . $mctagmap_description . '</li>';
 			$list .="\n";
 			}
 		if ($i > $num2show && $i == $num2show1 && $toggle == "no") {
 			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$more."</a>"."</li>"."\n";
 			}
 		if ($i >= $num2show1){
-               $list .= '<li class="hideli"><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . '</li>';
+               $list .= '<li class="hideli"><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . $mctagmap_description . '</li>';
 			   $list .="\n";
 		}
 		} else {
-			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . '</li>';
+			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . $mctagmap_description . '</li>';
 			$list .="\n";
 		}	
 		}	
@@ -509,50 +517,18 @@ add_filter( 'plugin_row_meta', 'mctagmap_donate', 10, 2 );
 
 // the JS and CSS
 add_action('wp_head', 'mcTagMapCSSandJS');
-function mcTagMapCSSandJS()
-{
-
-$VersionNumber = "6.0.2";
-
-if ($toggle == "no"){
-echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
-echo "\n";
-echo "<!-- mctagmap by tugbucket ". $VersionNumber ." -->";
-echo "\n";
-echo "<script type=\"text/javascript\">
-jQuery(document).ready(function() { 
-  jQuery('ul.links li.hideli').hide();
-  jQuery('ul.links li.morelink').show();
-  jQuery('a.more').click(function() {
-	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
-	 jQuery(this).parent('li.morelink').remove();
-  });
-});
-</script>\n\n";
-}
-if ($toggle != "no"){
-echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css" type="text/css" media="screen" />';
-echo "\n";
-echo "<!-- mctagmap by tugbucket ". $VersionNumber ." -->";
-echo "\n";
-echo "<script type=\"text/javascript\">
-jQuery(document).ready(function() { 
-  jQuery('a.less').hide();
-  jQuery('ul.links li.hideli').hide();
-  jQuery('ul.links li.morelink').show();
-  jQuery('a.more').click(function() {
-	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
-	 jQuery(this).parent('li.morelink').children('a.less').show();
-	 jQuery(this).hide();
-  });
-    jQuery('a.less').click(function() {
-	jQuery(this).parent().siblings('li.hideli').slideToggle('fast');
-	 jQuery(this).parent('li.morelink').children('a.more').show();
-	 jQuery(this).hide();
-  });
-});
-</script>\n\n";
-}
+function mcTagMapCSSandJS(){
+$mctagmapVersionNumber = "7.0";
+	echo "\n";
+	echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
+	echo "\n";
+	if ($toggle == "no"){
+		echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmapno.js?ver='.$mctagmapVersionNumber.'"></script>';
+	}
+	if ($toggle != "no"){
+		echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmapyes.js?ver='.$mctagmapVersionNumber.'"></script>';
+	}
+	echo "\n\n";
 }
 
 // overwrite single_tag_title()

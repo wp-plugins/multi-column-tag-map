@@ -3,13 +3,13 @@ Contributors: tugbucket
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
-Stable tag: 6.0.2
+Stable tag: 7.0
 
-Multi-column Tag Map displays a columnized, alphabetical and expandable listing of all tags used in your site.
+Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
 
 == Description ==
 
-Multi-column Tag Map display a columnized, alphabetical, expandable and toggleable listing of all tags used in your site. This makes it easier for visitors to quickly search for topics that might intrest them. 
+Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book. This makes it easier for your visitors to quickly search for topics that might intrest them. 
 
 = Features =
 * Alphabetically lists all tags used in the site
@@ -24,6 +24,8 @@ Multi-column Tag Map display a columnized, alphabetical, expandable and toggleab
 * Optionally list tags of peoples names last name first
 * Can display the number of posts that share a tag
 * Can exclude tags you do not want to appear in the lists
+* Can display the tag description
+* Can set the width of the columns in the shortcode
 
 
 == Installation ==
@@ -34,9 +36,9 @@ Unzip the 'mcTagMap' folder into '/wp-content/plugins/' and activate the plug in
 
 You can hardcode this into your themes' PHP files like so:
 
-`<?php if(function_exists('wp_mcTagMap')): ?>`
-`<?php wp_mcTagMap() ?>`
-`<?php endif; ?>`
+`<?php if(function_exists('wp_mcTagMap')): ?>
+<?php wp_mcTagMap() ?>
+<?php endif; ?>`
 
 
 This method is configurable in two ways.
@@ -53,9 +55,9 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 **NOTE:** As of version 4.0, only the shortcode installation will be supported.
 
 
-= Shortcode Installation =
+= Shortcode Installation Example =
 
-`[mctagmap columns="3" more="more &amp#187;" hide="no" num_show="4" toggle="&amp;#171;" show_empty="yes" name_divider="|" tag_count="yes"]`
+`[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170"]`
 
 
 = Defaults = 
@@ -69,6 +71,8 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * name_divider = |
 * tag_count = no (possible values: yes or no)
 * exclude = 
+* descriptions = no (possible values: yes or no)
+* width = 190 (do not use 'px', 'em', etc)
 
 = Explanation of options =
 
@@ -81,9 +85,11 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.
 * tag_count: If this option is set to "yes", the number of posts that share that tag will be displayed like "(3)". The count is wrapped in a span with a class of "mctagmap_count" so that the count can be styled individually in the CSS if desired. 
 * exclude: A coma seperated, case sensitive list of the tags you do not wish to appear in the lists.
+* descriptions: If set to yes, the plugin will create a span and populate it with the tags description. By default the text is set to 90% italics.
+* width: The default width (190px) can be set in the shortcode without any need to alter the CSS. 
 
 = Note =
-You must be using jQuery in order to use the show/hide feature 
+You must be using jQuery in order to use the show/hide feature.
 
 
 == Frequently Asked Questions ==
@@ -112,9 +118,10 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 * v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
 * v4.0.1 - Typos
 * v4.1 - oops
-* v4.2 - Fixed function conflict and added to the FAQ 
-* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option
-* v5.1 - cleaned up the tag_count function
-* v6.0 - Added language display support and the ability to exclude tags
+* v4.2 - Fixed function conflict and added to the FAQ.
+* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option.
+* v5.1 - cleaned up the tag_count function.
+* v6.0 - Added language display support and the ability to exclude tags.
 * v6.0.1 - upload error 
 * v6.0.2 - upload error 
+* v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
