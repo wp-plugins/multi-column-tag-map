@@ -1,11 +1,12 @@
 === Multi-column Tag Map ===
 Contributors: tugbucket
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
 Stable tag: 7.0
 
-Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
+Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
 
 == Description ==
 
@@ -58,6 +59,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 = Shortcode Installation Example =
 
 `[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170"]`
+
 
 
 = Defaults = 
