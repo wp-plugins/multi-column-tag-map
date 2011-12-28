@@ -127,7 +127,7 @@ Please remove that. That should fix it up.
 1. Using all options. `/trunk/screenshot-1.gif`
 2. In use at <a href=\"http://www.noveleats.com/ingredient/\">Novel Eats</a>. `/trunk/screenshot-2.gif`
 3. In use at the <a href=\"http://soctheory.iheartsociology.com/index/\">Department of Sociology of Occidental College</a>. `/trunk/screenshot-3.gif`
-4. Someextra styling added at <a href=\"http://blog.caplin.com/index/\">Caplin's blog</a>. `/trunk/screenshot-4.gif`
+4. Some extra styling added at <a href=\"http://blog.caplin.com/index/\">Caplin's blog</a>. `/trunk/screenshot-4.gif`
 5. The common "pre-code error". `/trunk/screenshot-5.gif`
 
 == Changelog ==
