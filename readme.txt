@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.2
-Stable tag: 7.0
+Stable tag: 8.0
 
 Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
 
@@ -27,6 +27,7 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * Can exclude tags you do not want to appear in the lists
 * Can display the tag description
 * Can set the width of the columns in the shortcode
+* Can add your own custom CSS to your theme's directory
 
 
 == Installation ==
@@ -58,7 +59,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 
 = Shortcode Installation Example =
 
-`[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170"]`
+`[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170" equal="yes"]`
 
 
 
@@ -75,6 +76,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * exclude = 
 * descriptions = no (possible values: yes or no)
 * width = 190 (do not use 'px', 'em', etc)
+* equal = no (possible values: yes or no)
 
 = Explanation of options =
 
@@ -89,9 +91,13 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * exclude: A coma seperated, case sensitive list of the tags you do not wish to appear in the lists.
 * descriptions: If set to yes, the plugin will create a span and populate it with the tags description. By default the text is set to 90% italics.
 * width: The default width (190px) can be set in the shortcode without any need to alter the CSS. 
+* equal: What this does is makes the horizontal sections equal height based on the tallest in the row. This is only recommended if you are using the "hide" option. Look at the first image in the screenshots page for a better example. 
 
 = Note =
 You must be using jQuery in order to use the show/hide feature.
+
+= Additional Options =
+In the past, when a new update was released, it would overwrite any changes manually made to the the files for the plugin. Now you can make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
 
 
 == Frequently Asked Questions ==
@@ -105,9 +111,24 @@ Currently the plugin only displays and groups non-English words. It does not sor
 mctagmap does nothing to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shouldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the hierarchy of your themes CSS but, that can be changed by editing the mctagmap.css in the plugins folder.
 
 
+= The map is displaying in a "stair case" fashion =
+
+See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"pre-code error"</a>.
+
+In your admin panel for the page, switch to HTML view. Notice your theme is wrapping the shortcode in:
+
+`<pre><code> </code></pre>`
+
+Please remove that. That should fix it up.
+
+
 == Screenshots ==
 
-1. Using all options view. `/trunk/screenshot-1.gif`
+1. Using all options. `/trunk/screenshot-1.gif`
+2. In use at <a href=\"http://www.noveleats.com/ingredient/\">Novel Eats</a>. `/trunk/screenshot-2.gif`
+3. In use at the <a href=\"http://soctheory.iheartsociology.com/index/\">Department of Sociology of Occidental College</a>. `/trunk/screenshot-3.gif`
+4. Someextra styling added at <a href=\"http://blog.caplin.com/index/\">Caplin's blog</a>. `/trunk/screenshot-4.gif`
+5. The common "pre-code error". `/trunk/screenshot-5.gif`
 
 == Changelog ==
 
@@ -124,6 +145,7 @@ mctagmap does nothing to the core functions of Wordpress. There should be no rea
 * v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option.
 * v5.1 - cleaned up the tag_count function.
 * v6.0 - Added language display support and the ability to exclude tags.
-* v6.0.1 - upload error 
-* v6.0.2 - upload error 
+* v6.0.1 - upload error. 
+* v6.0.2 - upload error. 
 * v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
+* v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.

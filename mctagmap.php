@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
-Version: 7.0
+Version: 8.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -263,7 +263,6 @@ print $list ;
 }
 // end long code
 
-
 // short code begins
 function sc_mcTagMap($atts, $content = null) {
         extract(shortcode_atts(array(
@@ -278,8 +277,8 @@ function sc_mcTagMap($atts, $content = null) {
 					"exclude" => "",
 					"descriptions" => "no",
 					"width" => "",
+					"equal" => "no",
         ), $atts));
-   
    
 	if($show_empty == "yes"){
 		$show_empty = "0";
@@ -291,9 +290,15 @@ function sc_mcTagMap($atts, $content = null) {
 	if($width){
 		$tug_width = "style=\"width: ". $width ."px;\"";
 	}
-
-
-    $list = '<!-- begin list --><div id="mcTagMap">';
+	if($equal == "yes" && $columns != "1"){ 
+		$equalize = 'mcEqualize';
+	}
+	if($toggle != "no"){
+		$toggable = "toggleYes";
+	} else {
+		$toggable = "toggleNo";
+	}
+    $list = '<!-- begin list --><div id="mcTagMap" class="'.$equalize.' '.$toggable.'">';
 	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
 
 	/* exclude tags */	
@@ -503,33 +508,34 @@ return $list;
 add_shortcode("mctagmap", "sc_mcTagMap");
 // end shortcode
 
+
+
 function mctagmap_donate($links, $file) {
 $plugin = plugin_basename(__FILE__);
 // create link
 if ($file == $plugin) {
-return array_merge( $links, array( sprintf( '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J" target="_blank">Donate</a>', $plugin, __('Donate') ) ));
+return array_merge( $links, array( sprintf( '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J" target="_blank">Donate to mctagmap development</a>', $plugin, __('Donate') ) ));
 }
 return $links;
 }
 add_filter( 'plugin_row_meta', 'mctagmap_donate', 10, 2 );
 
-
-
 // the JS and CSS
 add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS(){
-$mctagmapVersionNumber = "7.0";
+$mctagmapVersionNumber = "8.0";
+$mctagmapCSSpath = './wp-content/themes/'.get_template().'/multi-column-tag-map/mctagmap.css';
 	echo "\n";
-	echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
+	if(file_exists($mctagmapCSSpath)){
+		echo '<link rel="stylesheet" href="'.$mctagmapCSSpath.'?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
+	} else {
+		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
+	}
 	echo "\n";
-	if ($toggle == "no"){
-		echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmapno.js?ver='.$mctagmapVersionNumber.'"></script>';
-	}
-	if ($toggle != "no"){
-		echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmapyes.js?ver='.$mctagmapVersionNumber.'"></script>';
-	}
+	echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.js?ver='.$mctagmapVersionNumber.'"></script>';
 	echo "\n\n";
 }
+
 
 // overwrite single_tag_title()
 add_filter('single_tag_title', 'mctagmap_single_tag_title', 1, 2);
