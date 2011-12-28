@@ -117,7 +117,7 @@ See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-ma
 
 In your admin panel for the page, switch to HTML view. Notice your theme is wrapping the shortcode in:
 
-`<pre><code> </code></pre>`
+`&lt;pre>&lt;code> &lt;/code>&lt;/pre>`
 
 Please remove that. That should fix it up.
 
