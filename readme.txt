@@ -3,8 +3,8 @@ Contributors: tugbucket
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
-Tested up to: 3.2
-Stable tag: 8.0
+Tested up to: 3.3.1
+Stable tag: 9.0
 
 Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
 
@@ -59,7 +59,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 
 = Shortcode Installation Example =
 
-`[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170" equal="yes"]`
+`[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170" equal="yes" manual="" basic ="no"]`
 
 
 
@@ -77,6 +77,8 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * descriptions = no (possible values: yes or no)
 * width = 190 (do not use 'px', 'em', etc)
 * equal = no (possible values: yes or no)
+* manual =  (possible values: blank or a comma seperated list eg: "d, g, t")
+* basic = no (possible values: yes or no)
 
 = Explanation of options =
 
@@ -92,9 +94,11 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * descriptions: If set to yes, the plugin will create a span and populate it with the tags description. By default the text is set to 90% italics.
 * width: The default width (190px) can be set in the shortcode without any need to alter the CSS. 
 * equal: What this does is makes the horizontal sections equal height based on the tallest in the row. This is only recommended if you are using the "hide" option. Look at the first image in the screenshots page for a better example. 
+* manual: Each letter will create the begining of a new column. Exmple: 'manual="e, h, t".' This will create four columns (a-d, e-g, h-s and t-z+numbers). Writing "a, e, h, t" will have the same effect. The "columns" option is ignored as the "manual" setting over rides it.
+* basic: This removes all the alphanumeric headings. It then splits your columns by the number of tags rather than the number of headings. See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"The 'basic' option"</a>. The "more", "hide", "num_show", "toggle", and "equal" are ignored when using the "basic" option.
 
 = Note =
-You must be using jQuery in order to use the show/hide feature.
+You must be using jQuery in order to use the show, hide and equal feature.
 
 = Additional Options =
 In the past, when a new update was released, it would overwrite any changes manually made to the the files for the plugin. Now you can make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
@@ -129,6 +133,7 @@ Please remove that. That should fix it up.
 3. In use at the <a href=\"http://soctheory.iheartsociology.com/index/\">Department of Sociology of Occidental College</a>. `/trunk/screenshot-3.gif`
 4. Some extra styling added at <a href=\"http://blog.caplin.com/index/\">Caplin's blog</a>. `/trunk/screenshot-4.gif`
 5. The common "pre-code error". `/trunk/screenshot-5.gif`
+6. The "basic" option. `/trunk/screenshot-6.gif`
 
 == Changelog ==
 
@@ -149,3 +154,4 @@ Please remove that. That should fix it up.
 * v6.0.2 - upload error. 
 * v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
 * v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.
+* v9.0 - Added the "manual" and "basic" options.

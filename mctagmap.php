@@ -3,12 +3,12 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
-Version: 8.0
+Version: 9.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
 
-/*  Copyright 2009-2011  Alan Jackson (alan[at]tugbucket.net)
+/*  Copyright 2009-2012  Alan Jackson (alan[at]tugbucket.net)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -263,6 +263,15 @@ print $list ;
 }
 // end long code
 
+// **************************
+//
+//
+// SHORT CODE 
+//
+//
+// **************************
+
+
 // short code begins
 function sc_mcTagMap($atts, $content = null) {
         extract(shortcode_atts(array(
@@ -278,7 +287,14 @@ function sc_mcTagMap($atts, $content = null) {
 					"descriptions" => "no",
 					"width" => "",
 					"equal" => "no",
+					"manual" => "",
+					"basic" => "no",
+					"basic_heading" => "no",
         ), $atts));
+		
+	if(!in_array($columns, array(1, 2, 3, 4, 5))){
+		$columns = "2";
+	}
    
 	if($show_empty == "yes"){
 		$show_empty = "0";
@@ -290,7 +306,7 @@ function sc_mcTagMap($atts, $content = null) {
 	if($width){
 		$tug_width = "style=\"width: ". $width ."px;\"";
 	}
-	if($equal == "yes" && $columns != "1"){ 
+	if($equal == "yes" && $columns != "1" && $basic != "no"){ 
 		$equalize = 'mcEqualize';
 	}
 	if($toggle != "no"){
@@ -298,7 +314,41 @@ function sc_mcTagMap($atts, $content = null) {
 	} else {
 		$toggable = "toggleNo";
 	}
-    $list = '<!-- begin list --><div id="mcTagMap" class="'.$equalize.' '.$toggable.'">';
+
+	/* show settings */
+	if(isset($_REQUEST['tug'])){ 
+		$list = '<div>
+			<style type="text/css">
+				#tug-settings-mctagmap { border: 2px solid #ccc; background: #f8f8f8; font: 12px/16px monospace; padding: 10px; margin: 0; }
+				#tug-settings-mctagmap dt { padding: 0 0 8px 0; }
+				#tug-settings-mctagmap dd { margin-bottom: 6px; }
+			</style>
+			<dl id="tug-settings-mctagmap">
+				<dt>mctagmap settings</dt>
+					<dd>columns => '.$columns.'</dd>
+					<dd>more => '.$more.'</dd>
+					<dd>hide => '.$hide.'</dd>
+					<dd>num_show => '.$num_show.'</dd>
+					<dd>toggle => '.$toggle.'</dd>
+					<dd>show_empty => '.$show_empty.'</dd>
+					<dd>name_divider => '.$name_divider.'</dd>
+					<dd>tag_count => '.$tag_count.'</dd>
+					<dd>exclude => '.$exclude.'</dd>
+					<dd>descriptions => '.$descriptions.'</dd>
+					<dd>width => '.$width.'</dd>
+					<dd>equal => '.$equal.'</dd>
+					<dd>manual => '.$manual.'</dd>
+					<dd>basic => '.$basic.'</dd>
+					<dd>basic_heading => '.$basic_heading.'</dd>
+			</dl>
+			</div>';
+	} else {
+		$list = '';
+	}
+	$manual = str_replace(' ', '', strtoupper($manual));
+	$manualArray = explode(',', $manual);
+	
+    $list .= '<!-- begin list -->'."\n".'<div id="mcTagMap" class="'.$equalize.' '.$toggable.'">'."\n";
 	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
 
 	/* exclude tags */	
@@ -328,7 +378,10 @@ function sc_mcTagMap($atts, $content = null) {
 			ksort($groups);
 		}
 		}
+		
+				
 	if( !empty ( $groups ) ) {	
+			
 		$count = 0;
 		$howmany = count($groups);
 		
@@ -371,9 +424,8 @@ function sc_mcTagMap($atts, $content = null) {
 	    $fourthrow1 = ceil(($howmany * 0.8)-1);
 		}
 		
-
-
-		
+if(!$manual && $basic == "no"){
+	
 		foreach( $groups as $letter => $tags ) { 
 			if ($columns == 2){
 			if ($count == 0 || $count == $firstrow || $count ==  $secondrow) { 
@@ -419,17 +471,129 @@ function sc_mcTagMap($atts, $content = null) {
 				}
 				}
 				}
-		
+
+
     $list .= '<div class="tagindex">';
 	$list .="\n";
+
+
+
 	$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>';
+
 	$list .="\n";
 	$list .= '<ul class="links">';
 	$list .="\n";			
 	$i = 0;
 
 	uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
+
+	foreach( $tags as $tag ) {
+
+		/* exclude tags */
+		if(isset($tag->name)){
+		// added 9.28.11
+		if($tag_count == "yes"){
+			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
+		}
 		
+		$url = attribute_escape( get_tag_link( $tag->term_id ) );
+		$name = apply_filters( 'the_title', $tag->name );
+		if($descriptions == "yes"){
+			$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
+		}
+		//$name = ucfirst($name);
+		$i++;
+		$counti = $i;
+		if ($hide == "yes"){
+		$num2show = $num_show;
+		$num2show1 = ($num_show +1);
+		//$toggle = ($options['toggle']);
+		
+		if ($i != 0 and $i <= $num2show) {
+			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>'. $mctagmap_count . $mctagmap_description . '</li>';
+			$list .="\n";
+			}
+		if ($i > $num2show && $i == $num2show1 && $toggle == "no") {
+			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$more."</a>"."</li>"."\n";
+			}
+		if ($i >= $num2show1){
+               $list .= '<li class="hideli"><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . $mctagmap_description . '</li>';
+			   $list .="\n";
+		}
+		} else {
+			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . $mctagmap_description . '</li>';
+			$list .="\n";
+		}	
+		}	
+		
+	}
+		if ($hide == "yes" && $toggle != "no" && $i == $counti && $i > $num2show) {
+			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$more."</a>"."<a href=\"#x\" class=\"less\">".$toggle."</a>"."</li>"."\n";
+		}	 
+		 
+	$list .= '</ul>';
+	$list .="\n";
+	$list .= '</div>';
+
+	$list .="\n\n";
+		if ($columns == 3 || $columns == 2){
+		if ( $count == $firstrown1 || $count == $secondrown1) { 
+			$list .= "</div>"; 
+			}	
+			}
+		if ($columns == 4){
+		if ( $count == $firstrown1 || $count == $secondrown1 || $count == $thirdrow1) { 
+			$list .= "</div>"; 
+			}	
+			}
+		if ($columns == 5){		
+		if ( $count == $firstrown1 || $count == $secondrown1 || $count == $thirdrow1 || $count == $fourthrow1) { 
+			$list .= "</div>"; 
+			}	
+			}
+				 
+		$count++;
+			} 
+	$list .="</div>";
+	}
+}
+
+/*
+// ***************************
+// manual  settings 
+// ***************************
+*/
+
+if($manual && $basic == "no"){
+	$list .= "\n<div class='holdleft' ". $tug_width .">\n";
+	$manualCount = 1;
+	foreach( $groups as $letter => $tags ) {	
+		foreach(array(strtoupper(apply_filters('the_title', $letter))) as $qw) { 
+			if(in_array($qw, $manualArray)){
+				//$list .= '<div style="background: #000; color: #fff; padding: 3px;">In Array! - '. $qw.'</div>';
+				if($manualCount == count($manualArray)){
+					$marginEh = "noMargin";
+					$endManual = '</div>';
+				}
+				$list .= "</div>\n<div class='holdleft ". $marginEh ."' ". $tug_width . ">\n";
+				$manualCount++;
+			}			
+		}
+	
+    $list .= '<div class="tagindex">';
+	$list .="\n";
+
+
+
+	$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>';
+
+	$list .="\n";
+	$list .= '<ul class="links">';
+	$list .="\n";			
+	$i = 0;
+
+	uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
+
 	foreach( $tags as $tag ) {
 		/* exclude tags */
 		if(isset($tag->name)){
@@ -476,38 +640,116 @@ function sc_mcTagMap($atts, $content = null) {
 	$list .= '</ul>';
 	$list .="\n";
 	$list .= '</div>';
-	$list .="\n\n";
-		if ($columns == 3 || $columns == 2){
-		if ( $count == $firstrown1 || $count == $secondrown1) { 
-			$list .= "</div>"; 
+	}
+
+	$list .= $endManual;
+
+}
+/* 
+// ***********************************
+// end manual settings
+// ***********************************
+*/
+
+
+/*
+// ***************************
+// basic  settings 
+// ***************************
+*/
+if($basic == "yes"){
+	$sum = 0 - count(explode(',', $exclude));
+	foreach($tags as $tag){
+		$sum += $tag;
+	}
+	$basicCount = 1;
+	$list .= "\n<div class='holdleft' ". $tug_width .">\n";				
+    $list .= '<div class="tagindex">';
+	$list .="\n";
+	
+	foreach( $groups as $letter => $tags ) {
+		if($basic_heading == 'yes'){
+			$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>'."\n";
+		}
+		
+		
+	$list .= '<ul class="links">';
+	$list .="\n";		
+	
+		uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11		
+		foreach($tags as $tag){
+			if(isset($tag->name)){
+				if($tag_count == "yes"){
+					$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
+				}
+				$url = attribute_escape( get_tag_link( $tag->term_id ) );
+				$name = apply_filters( 'the_title', $tag->name );
+				if($descriptions == "yes"){
+					$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
+				}
+				$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>' . $mctagmap_count . $mctagmap_description . '</li>'."\n";
+				if($basicCount == ceil($sum/$columns) + 1){
+					$list .= '</ul>';
+					$list .="\n";
+					$list .= '</div>';
+					$list .= '</div>';
+					$list .= "\n<div class='holdleft' ". $tug_width .">\n";				
+    				$list .= '<div class="tagindex">';
+					$list .="\n";
+					$list .= '<ul class="links">';
+					$list .="\n";
+					$basicCount = 0;
+				}	
+				$basicCount++;
 			}	
-			}
-		if ($columns == 4){
-		if ( $count == $firstrown1 || $count == $secondrown1 || $count == $thirdrow1) { 
-			$list .= "</div>"; 
-			}	
-			}
-		if ($columns == 5){		
-		if ( $count == $firstrown1 || $count == $secondrown1 || $count == $thirdrow1 || $count == $fourthrow1) { 
-			$list .= "</div>"; 
-			}	
-			}
-				 
-		$count++;
-			} 
-		} 
-	$list .="</div>";
+		}
+		//$list .= '<li style="background: pink">'.$basicCount.'</li>';
+	} 
+	$list .= '</ul>';
+	$list .="\n";
+	$list .= '</div>';		
+	$list .= '</div>';
+
+}
+/* 
+// ***********************************
+// end basic settings
+// ***********************************
+*/
+
 	$list .= "<div style='clear: both;'></div></div><!-- end list -->";
 		}
 	else $list .= '<p>Sorry, but no tags were found</p>';
+	
+?>
+<?php
 
 return $list;
-
 }
 
 add_shortcode("mctagmap", "sc_mcTagMap");
 // end shortcode
 
+// the JS and CSS
+
+add_action('wp_head', 'mcTagMapCSSandJS');
+function mcTagMapCSSandJS(){
+		
+$mctagmapVersionNumber = "9.0";
+$mctagmapCSSpath = './wp-content/themes/'.get_template().'/multi-column-tag-map/mctagmap.css';
+
+
+	
+	echo "\n";
+	if(file_exists($mctagmapCSSpath)){
+		echo '<link rel="stylesheet" href="'.$mctagmapCSSpath.'?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
+	} else {
+		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
+	}
+	echo "\n";
+	echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.js?ver='.$mctagmapVersionNumber.'"></script>';
+	echo "\n\n";
+}
 
 
 function mctagmap_donate($links, $file) {
@@ -519,22 +761,6 @@ return array_merge( $links, array( sprintf( '<a href="https://www.paypal.com/cgi
 return $links;
 }
 add_filter( 'plugin_row_meta', 'mctagmap_donate', 10, 2 );
-
-// the JS and CSS
-add_action('wp_head', 'mcTagMapCSSandJS');
-function mcTagMapCSSandJS(){
-$mctagmapVersionNumber = "8.0";
-$mctagmapCSSpath = './wp-content/themes/'.get_template().'/multi-column-tag-map/mctagmap.css';
-	echo "\n";
-	if(file_exists($mctagmapCSSpath)){
-		echo '<link rel="stylesheet" href="'.$mctagmapCSSpath.'?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
-	} else {
-		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.css?ver='.$mctagmapVersionNumber.'" type="text/css" media="screen" />';
-	}
-	echo "\n";
-	echo '<script type="text/javascript" src="'.WP_PLUGIN_URL.'/multi-column-tag-map/mctagmap.js?ver='.$mctagmapVersionNumber.'"></script>';
-	echo "\n\n";
-}
 
 
 // overwrite single_tag_title()
@@ -556,6 +782,12 @@ function mctagmap_single_tag_title($prefix = '') {
 		else
 			return $my_tag_name;
 	}
+}
+
+// overwrite single_tag_title()
+add_filter('the_tags', 'mctagmap_the_tags');
+function mctagmap_the_tags($mctagmapTheTags) {
+    return str_replace('|', '', $mctagmapTheTags);
 }
 
 ?>
