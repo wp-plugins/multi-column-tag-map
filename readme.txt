@@ -79,6 +79,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * equal = no (possible values: yes or no)
 * manual =  (possible values: blank or a comma seperated list eg: "d, g, t")
 * basic = no (possible values: yes or no)
+* basic_heading = no (possible values: yes or no)
 
 = Explanation of options =
 
@@ -96,6 +97,7 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * equal: What this does is makes the horizontal sections equal height based on the tallest in the row. This is only recommended if you are using the "hide" option. Look at the first image in the screenshots page for a better example. 
 * manual: Each letter will create the begining of a new column. Exmple: 'manual="e, h, t".' This will create four columns (a-d, e-g, h-s and t-z+numbers). Writing "a, e, h, t" will have the same effect. The "columns" option is ignored as the "manual" setting over rides it.
 * basic: This removes all the alphanumeric headings. It then splits your columns by the number of tags rather than the number of headings. See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"The 'basic' option"</a>. The "more", "hide", "num_show", "toggle", and "equal" are ignored when using the "basic" option.
+* basic_heading: Turns the letter headings on or off in the basic mode.
 
 = Note =
 You must be using jQuery in order to use the show, hide and equal feature.
@@ -154,4 +156,4 @@ Please remove that. That should fix it up.
 * v6.0.2 - upload error. 
 * v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
 * v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.
-* v9.0 - Added the "manual" and "basic" options.
+* v9.0 - Added the "manual", "basic" and "basic_heading" options.
