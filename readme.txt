@@ -157,3 +157,4 @@ Please remove that. That should fix it up.
 * v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
 * v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.
 * v9.0 - Added the "manual", "basic" and "basic_heading" options.
+;)
