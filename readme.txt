@@ -6,7 +6,7 @@ Requires at least: 2.1
 Tested up to: 3.3.2
 Stable tag: 10.0
 
-Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories or single taxonomies used in your site similar to the index pages of a book.
+Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories or single taxonomies used in your site.
 
 == Description ==
 
