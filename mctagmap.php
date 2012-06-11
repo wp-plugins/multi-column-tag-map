@@ -2,8 +2,8 @@
 /*
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
-Description: Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
-Version: 9.0
+Description: Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
+Version: 10.0
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -25,252 +25,11 @@ Author URI: http://tugbucket.net
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function wp_mcTagMap($options='') {
-
-	$ns_options = array(
-                    "columns" => "2",
-                    "more" => "View More",
-					"hide" => "no",
-					"num_show" => "5",
-					"toggle" => "no",
-					"show_empty" => "yes",
-                   );
-			
-	if(strpos($options, '|')) {		   
-	$options = explode("|",$options);
-	} else {
-	$options = explode("&",$options);
-	}
-	
-	foreach ($options as $option) {
-	
-		$parts = explode("=",$option);
-		$options[$parts[0]] = $parts[1];
-	
-	}
-
-	if ($options['columns']) {
-	$ns_options['columns'] = $options['columns'];
-	} else {
-	$options['columns'] = 2;
-	}
-	
-    if ($options['more']) {
-	$ns_options['more'] = htmlentities($options['more'], ENT_QUOTES);
-	} else {
-	$options['more'] = "View more";
-	}
-	
-    if ($options['hide']) {
-	$ns_options['hide'] = $options['hide'];
-	} else {
-	$options['hide'] = "no";
-	}
-	
-    if ($options['num_show']) {
-	$ns_options['num_show'] = $options['num_show'];
-	} else {
-	$options['num_show'] = 5;
-	}
-	
-	if ($options['toggle']) {
-	$ns_options['toggle'] = $options['toggle'];
-	} else {
-	$options['toggle'] = "no";
-	}
-	
-	if ($options['show_empty']) {
-	$ns_options['show_empty'] = $options['show_empty'];
-	} else {
-	$options['show_empty'] = "yes";
-	}
-	
-	$show_empty = $options['show_empty'];
-	if($show_empty == "yes"){
-		$show_empty = "0";
-	}
-	if($show_empty == "no"){
-		$show_empty = "1";
-	}
-    $list = '<!-- begin list --><div id="mcTagMap">';
-	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
-	$groups = array();
-	
-	
-	
-	if( $tags && is_array( $tags ) ) {
-		foreach( $tags as $tag ) {
-			$first_letter = strtoupper( $tag->name[0] );
-			$groups[ $first_letter ][] = $tag;
-		}
-	if( !empty ( $groups ) ) {	
-		$count = 0;
-		$howmany = count($groups);
-		
-		// this makes 2 columns
-		if ($options['columns'] == 2){
-		$firstrow = ceil($howmany * 0.5);
-	    $secondrow = ceil($howmany * 1);
-	    $firstrown1 = ceil(($howmany * 0.5)-1);
-	    $secondrown1 = ceil(($howmany * 1)-0);
-		}
-		
-		
-		//this makes 3 columns
-		if ($options['columns'] == 3){
-	    $firstrow = ceil($howmany * 0.33);
-	    $secondrow = ceil($howmany * 0.66);
-	    $firstrown1 = ceil(($howmany * 0.33)-1);
-	    $secondrown1 = ceil(($howmany * 0.66)-1);
-		}
-		
-		//this makes 4 columns
-		if ($options['columns'] == 4){
-	    $firstrow = ceil($howmany * 0.25);
-	    $secondrow = ceil(($howmany * 0.5)+1);
-	    $firstrown1 = ceil(($howmany * 0.25)-1);
-	    $secondrown1 = ceil(($howmany * 0.5)-0);
-		$thirdrow = ceil(($howmany * 0.75)-0);
-	    $thirdrow1 = ceil(($howmany * 0.75)-1);
-		}
-		
-		//this makes 5 columns
-		if ($options['columns'] == 5){
-	    $firstrow = ceil($howmany * 0.2);
-	    $firstrown1 = ceil(($howmany * 0.2)-1);
-	    $secondrow = ceil(($howmany * 0.4));
-		$secondrown1 = ceil(($howmany * 0.4)-1);
-		$thirdrow = ceil(($howmany * 0.6)-0);
-	    $thirdrow1 = ceil(($howmany * 0.6)-1);
-		$fourthrow = ceil(($howmany * 0.8)-0);
-	    $fourthrow1 = ceil(($howmany * 0.8)-1);
-		}
-		
-		foreach( $groups as $letter => $tags ) { 
-			if ($options['columns'] == 2){
-			if ($count == 0 || $count == $firstrow || $count ==  $secondrow) { 
-			    if ($count == $firstrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
-				$list .="\n";
-				} else {
-				$list .= "\n<div class='holdleft'>\n";
-				$list .="\n";
-				}
-				}
-				}
-			if ($options['columns'] == 3){
-			if ($count == 0 || $count == $firstrow || $count ==  $secondrow) { 
-			    if ($count == $secondrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
-				$list .="\n";
-				} else {
-				$list .= "\n<div class='holdleft'>\n";
-				$list .="\n";
-				}
-				}
-				}
-			if ($options['columns'] == 4){				
-			if ($count == 0 || $count == $firstrow || $count ==  $secondrow || $count == $thirdrow) { 
-			    if ($count == $thirdrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
-				$list .="\n";
-				} else {
-				$list .= "\n<div class='holdleft'>\n";
-				$list .="\n";
-				}
-				}
-				}
-			if ($options['columns'] == 5){
-			if ($count == 0 || $count == $firstrow || $count ==  $secondrow || $count == $thirdrow || $count == $fourthrow ) { 
-			    if ($count == $fourthrow){
-				$list .= "\n<div class='holdleft noMargin'>\n";
-				$list .="\n";
-				} else {
-				$list .= "\n<div class='holdleft'>\n";
-				$list .="\n";
-				}
-				}
-				}
-		
-    $list .= '<div class="tagindex">';
-	$list .="\n";
-	$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>';
-	$list .="\n";
-	$list .= '<ul class="links">';
-	$list .="\n";			
-	$i = 0;
-	foreach( $tags as $tag ) {
-		$url = attribute_escape( get_tag_link( $tag->term_id ) );
-		$name = apply_filters( 'the_title', $tag->name );
-	//	$name = ucfirst($name);
-		$i++;
-		$counti = $i;
-		if ($options['hide'] == "yes"){
-		$num2show = $options['num_show'];
-		$num2show1 = ($options['num_show'] +1);
-		$toggle = ($options['toggle']);
-		
-		if ($i != 0 and $i <= $num2show) {
-			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
-			$list .="\n";
-			}
-		if ($i > $num2show && $i == $num2show1 && $toggle == "no") {
-			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$options['more']."</a>"."</li>"."\n";
-			}
-		if ($i >= $num2show1){
-               $list .= '<li class="hideli"><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
-			   $list .="\n";
-		}
-		} else {
-			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a></li>';
-			$list .="\n";
-		}	
-		
-	} 
-		if ($options['hide'] == "yes" && $toggle != "no" && $i == $counti && $i > $num2show) {
-			$list .=  "<li class=\"morelink\">"."<a href=\"#x\" class=\"more\">".$options['more']."</a>"."<a href=\"#x\" class=\"less\">".$options['toggle']."</a>"."</li>"."\n";
-		}	 
-	$list .= '</ul>';
-	$list .="\n";
-	$list .= '</div>';
-	$list .="\n\n";
-		if ($options['columns'] == 3 || $options['columns'] == 2){
-		if ( $count == $firstrown1 || $count == $secondrown1) { 
-			$list .= "</div>"; 
-			}	
-			}
-		if ($options['columns'] == 4){
-		if ( $count == $firstrown1 || $count == $secondrown1 || $count == $thirdrow1) { 
-			$list .= "</div>"; 
-			}	
-			}
-		if ($options['columns'] == 5){		
-		if ( $count == $firstrown1 || $count == $secondrown1 || $count == $thirdrow1 || $count == $fourthrow1) { 
-			$list .= "</div>"; 
-			}	
-			}
-				 
-		$count++;
-			} 
-		} 
-	$list .="</div>";
-	$list .= "<div style='clear: both;'></div></div><!-- end list -->";
-		}
-	else $list .= '<p>Sorry, but no tags were found</p>';
-
-print $list ;
-
-}
-// end long code
-
 // **************************
 //
-//
-// SHORT CODE 
-//
+// Long code removed completely as of version 10.0 - it was deprecated as of version 4.0
 //
 // **************************
-
 
 // short code begins
 function sc_mcTagMap($atts, $content = null) {
@@ -280,8 +39,8 @@ function sc_mcTagMap($atts, $content = null) {
 					"hide" => "no",
 					"num_show" => "5",
 					"toggle" => "no",
-					"show_empty" => "yes",
-					"name_divider" => "|", // added 09.02.11
+					"show_empty" => "no",
+					"name_divider" => "|",
 					"tag_count" => "no",
 					"exclude" => "",
 					"descriptions" => "no",
@@ -290,6 +49,10 @@ function sc_mcTagMap($atts, $content = null) {
 					"manual" => "",
 					"basic" => "no",
 					"basic_heading" => "no",
+					"show_categories" => "no",
+					"taxonomy" => "",
+					"group_numbers" => "no",
+					"show_navigation" => "no",
         ), $atts));
 		
 	if(!in_array($columns, array(1, 2, 3, 4, 5))){
@@ -340,6 +103,10 @@ function sc_mcTagMap($atts, $content = null) {
 					<dd>manual => '.$manual.'</dd>
 					<dd>basic => '.$basic.'</dd>
 					<dd>basic_heading => '.$basic_heading.'</dd>
+					<dd>show_categories => '.$show_categories.'</dd>
+					<dd>taxonomy => '.$taxonomy.'</dd>
+					<dd>group numbers => '.$group_numbers.'</dd>
+					<dd>show_navigation => '.$show_navigation.'</dd>
 			</dl>
 			</div>';
 	} else {
@@ -349,7 +116,14 @@ function sc_mcTagMap($atts, $content = null) {
 	$manualArray = explode(',', $manual);
 	
     $list .= '<!-- begin list -->'."\n".'<div id="mcTagMap" class="'.$equalize.' '.$toggable.'">'."\n";
-	$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); // new code!
+	
+	if($taxonomy){
+		$tags = get_terms($taxonomy, 'order=ASC&hide_empty='.$show_empty.''); 
+	} elseif($show_categories == "yes"){
+		$tags = get_categories('order=ASC&hide_empty='.$show_empty.'');
+	} else {
+		$tags = get_terms('post_tag', 'order=ASC&hide_empty='.$show_empty.''); 
+	}
 
 	/* exclude tags */	
 	foreach($tags as $tag){
@@ -374,12 +148,62 @@ function sc_mcTagMap($atts, $content = null) {
 			}
 			
 			$first_letter = mb_strtoupper( mb_substr($tag->name,0,1) ); /* Thanks to Birgir Erlendsson */
-			$groups[ $first_letter ][] = $tag;
+			$groups[$first_letter][] = $tag;
 			ksort($groups);
 		}
 		}
 		
-				
+		/* group numbers */
+		if($group_numbers == 'yes'){
+			$numericArray = array_filter(array_keys($groups), 'is_numeric');
+			$ed = array_keys($groups);
+			$d = array_diff_assoc($ed, $numericArray);
+			$numGroups = $groups;
+			foreach($d as $dd){
+				$numGroups[$dd] = "";
+			}
+			ksort($numGroups);		
+			function flatten($arr, $base = "", $divider_char = "/") {
+    			$ret = array();
+    			if(is_array($arr)) {
+        			foreach($arr as $k => $v) {
+            			if(is_array($v)) {
+                			$tmp_array = flatten($v, $base.$k.$divider_char, $divider_char);
+                			$ret = array_merge($ret, $tmp_array);
+            			} else {
+                			$ret[$base.$k] = $v;
+            			}
+        			}
+   				}
+    			return $ret;
+			}
+			$numbersArray = array_filter(array_values(flatten($numGroups)));
+			$groups = array_diff_assoc($groups, $numGroups);
+			if(!empty($numbersArray)){	
+				$nums = array('#' => $numbersArray);
+				$groups = array_merge($groups, $nums);
+			} 
+		}
+	
+		/* make the navigation */
+		$list .= '<div id="mcTagMapNav">'."\n";
+		foreach( array_keys($groups) as $fl ) {
+			$list .= '<a href="#mctm-'.$fl.'">'.$fl.'</a>'."\n";
+		}
+		$list .= '</div>'."\n";
+		
+		/* show headings regardless */
+		/*
+		$alphabet = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+		$ress = array_diff($alphabet, array_keys($groups));
+		foreach($ress as $res){
+			$groups[$res] = "";
+		}
+		ksort($groups);
+		error_reporting(0);
+		*/
+		/* *** */
+		
 	if( !empty ( $groups ) ) {	
 			
 		$count = 0;
@@ -478,36 +302,41 @@ if(!$manual && $basic == "no"){
 
 
 
-	$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>';
+	$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter ) . '</h4>';
 
 	$list .="\n";
 	$list .= '<ul class="links">';
 	$list .="\n";			
 	$i = 0;
-
+	
 	uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
-
+	
 	foreach( $tags as $tag ) {
 
 		/* exclude tags */
 		if(isset($tag->name)){
-		// added 9.28.11
 		if($tag_count == "yes"){
 			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
 		}
+
+		if($taxonomy){
+			$url = get_term_link($tag->slug, $taxonomy);
+		} elseif($show_categories == "yes"){
+			$url = get_category_link($tag->term_id); 
+		} else {
+			$url = attribute_escape( get_tag_link( $tag->term_id ) ); 
+		}
 		
-		$url = attribute_escape( get_tag_link( $tag->term_id ) );
 		$name = apply_filters( 'the_title', $tag->name );
 		if($descriptions == "yes"){
 			$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
 		}
-		//$name = ucfirst($name);
+
 		$i++;
 		$counti = $i;
 		if ($hide == "yes"){
 		$num2show = $num_show;
 		$num2show1 = ($num_show +1);
-		//$toggle = ($options['toggle']);
 		
 		if ($i != 0 and $i <= $num2show) {
 			$list .= '<li><a title="' . $name . '" href="' . $url . '">' . $name . '</a>'. $mctagmap_count . $mctagmap_description . '</li>';
@@ -585,7 +414,7 @@ if($manual && $basic == "no"){
 
 
 
-	$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>';
+	$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter ) . '</h4>';
 
 	$list .="\n";
 	$list .= '<ul class="links">';
@@ -602,7 +431,14 @@ if($manual && $basic == "no"){
 			$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
 		}
 		
-		$url = attribute_escape( get_tag_link( $tag->term_id ) );
+		if($taxonomy){
+			$url = get_term_link($tag->slug, $taxonomy);
+		} elseif($show_categories == "yes"){
+			$url = get_category_link($tag->term_id); 
+		} else {
+			$url = attribute_escape( get_tag_link( $tag->term_id ) ); 
+		}
+		
 		$name = apply_filters( 'the_title', $tag->name );
 		if($descriptions == "yes"){
 			$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
@@ -669,7 +505,7 @@ if($basic == "yes"){
 	
 	foreach( $groups as $letter => $tags ) {
 		if($basic_heading == 'yes'){
-			$list .='<h4>' . apply_filters( 'the_title', $letter ) . '</h4>'."\n";
+			$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter ) . '</h4>'."\n";
 		}
 		
 		
@@ -682,7 +518,15 @@ if($basic == "yes"){
 				if($tag_count == "yes"){
 					$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
 				}
-				$url = attribute_escape( get_tag_link( $tag->term_id ) );
+				
+				if($taxonomy){
+					$url = get_term_link($tag->slug, $taxonomy);
+				} elseif($show_categories == "yes"){
+					$url = get_category_link($tag->term_id); 
+				} else {
+					$url = attribute_escape( get_tag_link( $tag->term_id ) ); 
+				}
+				
 				$name = apply_filters( 'the_title', $tag->name );
 				if($descriptions == "yes"){
 					$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
@@ -735,7 +579,7 @@ add_shortcode("mctagmap", "sc_mcTagMap");
 add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS(){
 		
-$mctagmapVersionNumber = "9.0";
+$mctagmapVersionNumber = "10.0";
 $mctagmapCSSpath = './wp-content/themes/'.get_template().'/multi-column-tag-map/mctagmap.css';
 
 

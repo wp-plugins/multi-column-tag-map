@@ -1,4 +1,4 @@
-/* version 8.0 */
+/* version 10.0 */
 
 #mcTagMap .tagindex, #sc_mcTagMap .tagindex { 
 padding: 6px 0 10px 0; 
@@ -43,4 +43,22 @@ display: block;
 font-size: 90%;
 line-height: 1;
 font-style: italic;
+}
+
+#mcTagMap #mcTagMapNav {
+display: block;
+background: #eee;
+float: left;
+width: 100%;
+text-align: center;
+padding: 5px 0;
+border: 1px solid #888;
+}
+#mcTagMap #mcTagMapNav a {
+text-decoration: none;
+padding: 3px 2px 3px 6px;
+border-left: 1px solid #888;
+}
+#mcTagMap #mcTagMapNav a:first-child {
+border-left: none;
 }

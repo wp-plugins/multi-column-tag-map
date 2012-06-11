@@ -3,16 +3,17 @@ Contributors: tugbucket
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
-Tested up to: 3.3.1
-Stable tag: 9.0
+Tested up to: 3.3.2
+Stable tag: 10.0
 
-Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
+Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories or single taxonomies used in your site similar to the index pages of a book.
 
 == Description ==
 
-Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags used in your site similar to the index pages of a book. This makes it easier for your visitors to quickly search for topics that might intrest them. 
+Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags, categories or single taxonomies used in your site similar to the index pages of a book. This makes it easier for your visitors to quickly search for topics that might intrest them. 
 
 = Features =
+* Can be set to display all tags, all categories or single taxonomies
 * Alphabetically lists all tags used in the site
 * Display tags in one to five columns
 * The initial amount of tags from each letter can be limited
@@ -32,35 +33,9 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 
 == Installation ==
 
-Unzip the 'mcTagMap' folder into '/wp-content/plugins/' and activate the plug in the Wordpress admin area.
-
-= Hardcode Installation **deprecated since verion 4.0** =
-
-You can hardcode this into your themes' PHP files like so:
-
-`<?php if(function_exists('wp_mcTagMap')): ?>
-<?php wp_mcTagMap() ?>
-<?php endif; ?>`
-
-
-This method is configurable in two ways.
-
-The first method uses the standard '&' dilemeter. This method does not allow for special characters (shown with default values).
-
-`<?php wp_mcTagMap('columns=2&hide=no&num_show=5&more=View more&toggle=no&show_empty=no') ?>`
-
-
-The second method uses the vertical pipe '|' as a dilemeter thus allowing the use of special characters:
-
-`<?php wp_mcTagMap('columns=3|hide=yes|num_show=10|more=more &amp;#187;|toggle=&amp;#171; less|show_empty=yes') ?>`
-
-**NOTE:** As of version 4.0, only the shortcode installation will be supported.
-
-
 = Shortcode Installation Example =
 
-`[mctagmap columns="3" more="more &#187;" hide="yes" num_show="3" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" descriptions="yes" exclude="2009,exposition" width="170" equal="yes" manual="" basic ="no"]`
-
+`[mctagmap columns="3" hide="yes" num_show="3" more="more &#187;" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" exclude="2009, exposition" descriptions="yes" width="170" equal="yes" manual="" basic ="no" basic_heading="no"]`
 
 
 = Defaults = 
@@ -80,6 +55,10 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * manual =  (possible values: blank or a comma seperated list eg: "d, g, t")
 * basic = no (possible values: yes or no)
 * basic_heading = no (possible values: yes or no)
+* show_categories => no (possible values: yes or no)
+* taxonomy => 
+* group_numbers => no (possible values: yes or no)
+* show_navigation => no (possible values: yes or no)
 
 = Explanation of options =
 
@@ -98,12 +77,16 @@ The second method uses the vertical pipe '|' as a dilemeter thus allowing the us
 * manual: Each letter will create the begining of a new column. Exmple: 'manual="e, h, t".' This will create four columns (a-d, e-g, h-s and t-z+numbers). Writing "a, e, h, t" will have the same effect. The "columns" option is ignored as the "manual" setting over rides it.
 * basic: This removes all the alphanumeric headings. It then splits your columns by the number of tags rather than the number of headings. See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"The 'basic' option"</a>. The "more", "hide", "num_show", "toggle", and "equal" are ignored when using the "basic" option.
 * basic_heading: Turns the letter headings on or off in the basic mode.
+* show_categories: if set to "yes", the plugin will list categories instead of tags.
+* taxonomy: If you enter a taxonomy, the plugin will only display tags from that taxonomy.
+* group_numbers: If set to "yes", this will group all tags beginning with a number together. They will then be put under one heading of "#" in the list.
+* show_navigation: If set to "yes", a div will be added before your lists with jump links to the corresponding heading. See screen shot #7.
 
 = Note =
 You must be using jQuery in order to use the show, hide and equal feature.
 
 = Additional Options =
-In the past, when a new update was released, it would overwrite any changes manually made to the the files for the plugin. Now you can make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
+If you make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
 
 
 == Frequently Asked Questions ==
@@ -116,7 +99,6 @@ Currently the plugin only displays and groups non-English words. It does not sor
 
 mctagmap does nothing to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shouldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the hierarchy of your themes CSS but, that can be changed by editing the mctagmap.css in the plugins folder.
 
-
 = The map is displaying in a "stair case" fashion =
 
 See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"pre-code error"</a>.
@@ -127,6 +109,10 @@ In your admin panel for the page, switch to HTML view. Notice your theme is wrap
 
 Please remove that. That should fix it up.
 
+= Can the plugin include tags from [insert plugin name]? =
+
+Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins (NextGen, The Events Calendar, etc...) create tags but, they are not stored in the databse the same way as Wordpress does. Combing those tags into Multi-column Tag Map is possible but, any method of doing this is a hack and is not supported out of the box. I will not add this functionality to the plugin as a default since I have no control over the other plugins and can not make any guarantee that the other plugins will not chage how they structure and handle tags in the future.
+
 
 == Screenshots ==
 
@@ -136,6 +122,7 @@ Please remove that. That should fix it up.
 4. Some extra styling added at <a href=\"http://blog.caplin.com/index/\">Caplin's blog</a>. `/trunk/screenshot-4.gif`
 5. The common "pre-code error". `/trunk/screenshot-5.gif`
 6. The "basic" option. `/trunk/screenshot-6.gif`
+7. The "show_navigation" option. `/trunk/screenshot-7.gif`
 
 == Changelog ==
 
@@ -157,4 +144,4 @@ Please remove that. That should fix it up.
 * v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
 * v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.
 * v9.0 - Added the "manual", "basic" and "basic_heading" options.
-;)
+* v10.0 - Removed the old hardcode version completely. Options "show_categories". "taxonomy", "group_numbers", and "show_navigation" added.
