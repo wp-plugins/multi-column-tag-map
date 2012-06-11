@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
-Version: 10.0
+Version: 10.0.1
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -27,7 +27,7 @@ Author URI: http://tugbucket.net
 
 // **************************
 //
-// Long code removed completely as of version 10.0 - it was deprecated as of version 4.0
+// Long code removed completely as of version 10.0.1 - it was deprecated as of version 4.0
 //
 // **************************
 
@@ -186,11 +186,13 @@ function sc_mcTagMap($atts, $content = null) {
 		}
 	
 		/* make the navigation */
-		$list .= '<div id="mcTagMapNav">'."\n";
-		foreach( array_keys($groups) as $fl ) {
-			$list .= '<a href="#mctm-'.$fl.'">'.$fl.'</a>'."\n";
+		if($show_navigation == "yes"){
+			$list .= '<div id="mcTagMapNav">'."\n";
+			foreach( array_keys($groups) as $fl ) {
+				$list .= '<a href="#mctm-'.$fl.'">'.$fl.'</a>'."\n";
+			}
+			$list .= '</div>'."\n";
 		}
-		$list .= '</div>'."\n";
 		
 		/* show headings regardless */
 		/*
@@ -579,7 +581,7 @@ add_shortcode("mctagmap", "sc_mcTagMap");
 add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS(){
 		
-$mctagmapVersionNumber = "10.0";
+$mctagmapVersionNumber = "10.0.1";
 $mctagmapCSSpath = './wp-content/themes/'.get_template().'/multi-column-tag-map/mctagmap.css';
 
 
