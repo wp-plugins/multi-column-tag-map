@@ -3,8 +3,8 @@ Contributors: tugbucket
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
-Tested up to: 3.3.2
-Stable tag: 10.0.1
+Tested up to: 3.4.1
+Stable tag: 11.0
 
 Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories or single taxonomies used in your site.
 
@@ -13,7 +13,8 @@ Multi-column Tag Map displays a columnized and alphabetical (English) listing of
 Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags, categories or single taxonomies used in your site similar to the index pages of a book. This makes it easier for your visitors to quickly search for topics that might intrest them. 
 
 = Features =
-* Can be set to display all tags, all categories or single taxonomies
+* Can be set to display all tags, all categories, all pages or single taxonomies
+* Can also list child categories
 * Alphabetically lists all tags used in the site
 * Display tags in one to five columns
 * The initial amount of tags from each letter can be limited
@@ -29,6 +30,7 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * Can display the tag description
 * Can set the width of the columns in the shortcode
 * Can add your own custom CSS to your theme's directory
+* Can show a list of tags by a specific category
 
 
 == Installation ==
@@ -55,10 +57,14 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * manual =  (possible values: blank or a comma seperated list eg: "d, g, t")
 * basic = no (possible values: yes or no)
 * basic_heading = no (possible values: yes or no)
-* show_categories => no (possible values: yes or no)
-* taxonomy => 
-* group_numbers => no (possible values: yes or no)
-* show_navigation => no (possible values: yes or no)
+* show_categories = no (possible values: yes or no)
+* child_of = 0 (values are numeric)
+* from_category =  (values are numeric)
+* show_pages => no
+* page_excerpt => no
+* taxonomy = 
+* group_numbers = no (possible values: yes or no)
+* show_navigation = no (possible values: yes or no)
 
 = Explanation of options =
 
@@ -81,12 +87,17 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * taxonomy: If you enter a taxonomy, the plugin will only display tags from that taxonomy.
 * group_numbers: If set to "yes", this will group all tags beginning with a number together. They will then be put under one heading of "#" in the list.
 * show_navigation: If set to "yes", a div will be added before your lists with jump links to the corresponding heading. See screen shot #7.
+* child_of: if show_categories is set to "yes", you can input a comma delimited list of category IDs eg, "2, 215, 209" and so on. 
+* from_category: You can enter a single numeric ID of a category and it will only sort tags from that category.
+* show_pages: If set to "yes" this will list pages instead of tags.
+* page_excerpt: If set to yes and you have set a page excerpt, this will display the excerpt in the same way you can display tag descriptions.
 
 = Note =
 You must be using jQuery in order to use the show, hide and equal feature.
 
 = Additional Options =
-If you make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
+* If you make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
+* There is a reverse exclude feature. You can add exclude="*!er" and will only list tags that include "er" in them. Example: exclude="*!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
 
 
 == Frequently Asked Questions ==
@@ -146,3 +157,4 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v9.0 - Added the "manual", "basic" and "basic_heading" options.
 * v10.0 - Removed the old hardcode version completely. Options "show_categories". "taxonomy", "group_numbers", and "show_navigation" added.
 * v10.0.1 - Fixed "show_navigation" issue
+* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerp", "*!", "from_category", "child_of"
