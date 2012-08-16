@@ -97,7 +97,7 @@ You must be using jQuery in order to use the show, hide and equal feature.
 
 = Additional Options =
 * If you make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
-* There is a reverse exclude feature. You can add exclude="*!er" and will only list tags that include "er" in them. Example: exclude="*!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
+* There is a reverse exclude feature. You can add exclude="&#42;!er" and will only list tags that include "er" in them. Example: exclude="&#42;!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
 
 
 == Frequently Asked Questions ==
@@ -157,4 +157,4 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v9.0 - Added the "manual", "basic" and "basic_heading" options.
 * v10.0 - Removed the old hardcode version completely. Options "show_categories". "taxonomy", "group_numbers", and "show_navigation" added.
 * v10.0.1 - Fixed "show_navigation" issue
-* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerp", "*!", "from_category", "child_of"
+* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerp", "&#42;!", "from_category", "child_of"
