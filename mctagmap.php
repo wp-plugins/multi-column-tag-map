@@ -3,7 +3,7 @@
 Plugin Name: Multi-column Tag Map 
 Plugin URI: http://tugbucket.net/wordpress/wordpress-plugin-multi-column-tag-map/
 Description: Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags used in your site similar to the index pages of a book.
-Version: 11.0.1
+Version: 11.0.2
 Author: Alan Jackson
 Author URI: http://tugbucket.net
 */
@@ -52,7 +52,7 @@ function sc_mcTagMap($atts, $content = null) {
 					"basic" => "no",
 					"basic_heading" => "no",
 					"show_categories" => "no",
-					"child_of" => "0",
+					"child_of" => "",
 					"from_category" => "",
 					"show_pages" => "no",
 					"page_excerpt" => "no",
@@ -143,13 +143,20 @@ function sc_mcTagMap($atts, $content = null) {
 	if($taxonomy){
 		$tags = get_terms($taxonomy, 'order=ASC&hide_empty='.$show_empty.''); 
 	} elseif($show_categories == "yes"){
-		$childof = preg_replace('/\s+/', '', explode(',',$child_of));
-		$tags = array();
-		foreach($childof as $kids){
-			if(!empty($kids)){
-				$chillins = get_categories('child_of='.$kids.'&order=ASC&hide_empty='.$show_empty.'');
-				$tags = array_merge($tags, $chillins);
+		if($child_of != ""){
+			$childof = array();
+			$childof = preg_replace('/\s+/', '', explode(',',$child_of));
+			$tags = array();
+			foreach($childof as $kids){
+				$args = array(
+					'child_of' => $kids,
+					'order' => 'ASC'
+				);
+				$childcats = get_categories($args);
+				$tags = array_merge($tags, $childcats);
 			}
+		} else {
+			$tags = get_categories('order=ASC&hide_empty='.$show_empty.'');
 		}	
 	} elseif($show_pages == "yes"){
 		$tags = get_pages('sort_order=ASC&hide_empty='.$show_empty.'');
@@ -207,7 +214,7 @@ function sc_mcTagMap($atts, $content = null) {
 				$tag->$arraypart = $tagParts[1].', '.$tagParts[0];
 			}
 
-    		if(function_exists('mb_substr')) {
+    		if(function_exists('mb_strtoupper')) {
         		$first_letter = mb_strtoupper(mb_substr($tag->$arraypart,0,1)); /* Thanks to Birgir Erlendsson */
     		} else {
         		$first_letter = strtoupper(substr($tag->$arraypart,0,1)); /* Thanks to Birgir Erlendsson */
@@ -666,7 +673,7 @@ add_shortcode("mctagmap", "sc_mcTagMap");
 add_action('wp_head', 'mcTagMapCSSandJS');
 function mcTagMapCSSandJS(){
 		
-$mctagmapVersionNumber = "11.0.1";
+$mctagmapVersionNumber = "11.0.2";
 $mctagmapCSSpath = './wp-content/themes/'.get_template().'/multi-column-tag-map/mctagmap.css';
 
 
