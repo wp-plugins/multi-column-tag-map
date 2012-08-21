@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.4.1
-Stable tag: 11.0.2
+Stable tag: 11.0.3
 
 Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories or single taxonomies used in your site.
 
@@ -88,7 +88,7 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * group_numbers: If set to "yes", this will group all tags beginning with a number together. They will then be put under one heading of "#" in the list.
 * show_navigation: If set to "yes", a div will be added before your lists with jump links to the corresponding heading. See screen shot #7.
 * child_of: if show_categories is set to "yes", you can input a comma delimited list of category IDs eg, "2, 215, 209" and so on. 
-* from_category: You can enter a single numeric ID of a category and it will only sort tags from that category.
+* from_category: You can enter a single numeric ID of a category and it will only sort tags from that category. See "Theme Addition" under Additional Options.
 * show_pages: If set to "yes" this will list pages instead of tags.
 * page_excerpt: If set to yes and you have set a page excerpt, this will display the excerpt in the same way you can display tag descriptions.
 
@@ -98,6 +98,14 @@ You must be using jQuery in order to use the show, hide and equal feature.
 = Additional Options =
 * If you make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
 * There is a reverse exclude feature. You can add exclude="&#42;!er" and will only list tags that include "er" in them. Example: exclude="&#42;!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
+
+= Theme Addition =
+If you are using the "from_category" option, you will have to modify your theme to display the tag archives correctly. Below is an example of what you can try before your loop in your themes tag archive page. In my test theme, there is a "tag.php" file that displays the archives for tags.  Each theme can be totally different so this is only an example. I can not give specific advice on how to implement this on any specific theme. 
+`
+<?php if(isset($_GET['mctmCatId']) && isset($_GET['mctmTag'])){
+query_posts('cat='.$_GET['mctmCatId'].'&tag='.$_GET['mctmTag']);
+} ?>
+`
 
 
 == Frequently Asked Questions ==
@@ -157,6 +165,7 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v9.0 - Added the "manual", "basic" and "basic_heading" options.
 * v10.0 - Removed the old hardcode version completely. Options "show_categories". "taxonomy", "group_numbers", and "show_navigation" added.
 * v10.0.1 - Fixed "show_navigation" issue
-* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerp", "&#42;!", "from_category", "child_of"
+* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerpt", "&#42;!", "from_category", "child_of"
 * v11.0.1 - Corrected plugin conflict.
 * v11.0.2 - Fixed show_categories and tuned a PHP 4.x issue.
+* v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
