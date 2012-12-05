@@ -1,4 +1,13 @@
-/* version 11.0.3 */
+/* ===== 
+
+You are free to modify this file but you should really create a folder in your
+themes directory called (exactly) multi-column-tag-map and then copy this file 
+to that folder. Make your edits to the copy. If you make your edits to the 
+file in the plugins folder, all your edits will be overwritten if you update.
+
+===== */ 
+
+/* =====  version 12.0 ===== */ 
 
 /* ===== equalize ===== */
 
@@ -43,8 +52,8 @@ jQuery(document).ready(function(){
 	    numberOfHoldLeftChildren++;
 	}
 
-/* === test purposes
+/* ==== test purposes 
 jQuery('.tagindex').css({'background-color' : '#D9CBDB', 'margin-bottom' : '10px'});
-=== */
+==== */
   
 });

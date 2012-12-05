@@ -3,14 +3,14 @@ Contributors: tugbucket
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
-Tested up to: 3.4.1
-Stable tag: 11.0.3
+Tested up to: 3.4.2
+Stable tag: 12.0
 
-Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories or single taxonomies used in your site.
+Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site.
 
 == Description ==
 
-Multi-column Tag Map displays a columnized  and alphabetical (English) listing of all tags, categories or single taxonomies used in your site similar to the index pages of a book. This makes it easier for your visitors to quickly search for topics that might intrest them. 
+Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site similar to the index page of a book. This makes it easier for your visitors to quickly search for topics that might intrest them. 
 
 = Features =
 * Can be set to display all tags, all categories, all pages or single taxonomies
@@ -32,13 +32,11 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * Can add your own custom CSS to your theme's directory
 * Can show a list of tags by a specific category
 
-
 == Installation ==
 
 = Shortcode Installation Example =
 
 `[mctagmap columns="3" hide="yes" num_show="3" more="more &#187;" toggle="&#171; less" show_empty="yes" name_divider="|" tag_count="yes" exclude="2009, exposition" descriptions="yes" width="170" equal="yes" manual="" basic ="no" basic_heading="no"]`
-
 
 = Defaults = 
 
@@ -48,7 +46,7 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * more = View more
 * toggle = no (possible values: 'YOUR TEXT' or no)
 * show_empty = no (possible values: yes or no)
-* name_divider = |
+* name_divider = | (vertical pipe)
 * tag_count = no (possible values: yes or no)
 * exclude = 
 * descriptions = no (possible values: yes or no)
@@ -59,9 +57,9 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 * basic_heading = no (possible values: yes or no)
 * show_categories = no (possible values: yes or no)
 * child_of = 0 (values are numeric)
-* from_category =  (values are numeric)
-* show_pages => no
-* page_excerpt => no
+* from_category = (values are numeric)
+* show_pages = no (possible values: yes or no)
+* page_excerpt = no (possible values: yes or no)
 * taxonomy = 
 * group_numbers = no (possible values: yes or no)
 * show_navigation = no (possible values: yes or no)
@@ -96,7 +94,9 @@ Multi-column Tag Map displays a columnized  and alphabetical (English) listing o
 You must be using jQuery in order to use the show, hide and equal feature.
 
 = Additional Options =
-* If you make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
+* If you wish to make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
+* If you wish to make JavaScript changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.js" into that folder. There you can make JavaScript changes that will not be overwritten when you update the mctagmap plugin.
+* If you wish to make PHP changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap_functions.php" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
 * There is a reverse exclude feature. You can add exclude="&#42;!er" and will only list tags that include "er" in them. Example: exclude="&#42;!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
 
 = Theme Addition =
@@ -106,7 +106,6 @@ If you are using the "from_category" option, you will have to modify your theme 
 query_posts('cat='.$_GET['mctmCatId'].'&tag='.$_GET['mctmTag']);
 } ?>
 `
-
 
 == Frequently Asked Questions ==
 
@@ -130,7 +129,7 @@ Please remove that. That should fix it up.
 
 = Can the plugin include tags from [insert plugin name]? =
 
-Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins (NextGen, The Events Calendar, etc...) create tags but, they are not stored in the databse the same way as Wordpress does. Combing those tags into Multi-column Tag Map is possible but, any method of doing this is a hack and is not supported out of the box. I will not add this functionality to the plugin as a default since I have no control over the other plugins and can not make any guarantee that the other plugins will not chage how they structure and handle tags in the future.
+Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins (NextGen, The Events Calendar, etc...) create tags but, they are not stored in the databse the same way as Wordpress does. Combing those tags into Multi-column Tag Map is possible but, any method of doing this is a hack and is not supported out of the box. I will not add this functionality to the plugin as a default since I have no control over the other plugins and can not make any guarantee that the other plugins will not change how they structure and handle tags in the future.
 
 
 == Screenshots ==
@@ -169,3 +168,4 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v11.0.1 - Corrected plugin conflict.
 * v11.0.2 - Fixed show_categories and tuned a PHP 4.x issue.
 * v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
+* v12.0 - Fixed the numberposts issue for showing categories. Fixed the way scripts were loaded for SSL use. Fixed the "flatten" function conflict. You can now use your own CSS, JS and PHP if desired.
