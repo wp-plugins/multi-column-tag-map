@@ -3,8 +3,8 @@ Contributors: tugbucket
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
-Tested up to: 3.4.2
-Stable tag: 12.0
+Tested up to: 3.5.1
+Stable tag: 12.0.1
 
 Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site.
 
@@ -96,7 +96,7 @@ You must be using jQuery in order to use the show, hide and equal feature.
 = Additional Options =
 * If you wish to make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
 * If you wish to make JavaScript changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.js" into that folder. There you can make JavaScript changes that will not be overwritten when you update the mctagmap plugin.
-* If you wish to make PHP changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap_functions.php" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
+* If you wish to make PHP changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap_functions.php" into that folder. There you can make PHP changes that will not be overwritten when you update the mctagmap plugin.
 * There is a reverse exclude feature. You can add exclude="&#42;!er" and will only list tags that include "er" in them. Example: exclude="&#42;!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
 
 = Theme Addition =
@@ -169,3 +169,4 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v11.0.2 - Fixed show_categories and tuned a PHP 4.x issue.
 * v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
 * v12.0 - Fixed the numberposts issue for showing categories. Fixed the way scripts were loaded for SSL use. Fixed the "flatten" function conflict. You can now use your own CSS, JS and PHP if desired.
+* v12.0.1 - Sort issue with show_pages addressed.

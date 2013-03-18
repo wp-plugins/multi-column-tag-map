@@ -9,7 +9,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 
 ===== */ 
 	
-	/* =====  version 12.0 ===== */ 
+	/* =====  version 12.0.1 ===== */ 
 
 	/* ===== set up options ===== */ 
 	extract(shortcode_atts(array(
@@ -135,7 +135,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			$tags = get_categories('order=ASC&hide_empty='.$show_empty.'');
 		}	
 	} elseif($show_pages == "yes"){
-		$tags = get_pages('sort_order=ASC&hide_empty='.$show_empty.'');
+		$tags = get_pages('sort_order=DESC&hide_empty='.$show_empty.'');
 	} elseif($from_category){
 		$tags = array();
 		$posts_array = get_posts('category='.$from_category.'&numberposts=-1');
