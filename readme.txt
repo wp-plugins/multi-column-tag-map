@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
 Requires at least: 2.1
 Tested up to: 3.5.1
-Stable tag: 12.0.1
+Stable tag: 12.0.2
 
 Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site.
 
@@ -170,3 +170,4 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
 * v12.0 - Fixed the numberposts issue for showing categories. Fixed the way scripts were loaded for SSL use. Fixed the "flatten" function conflict. You can now use your own CSS, JS and PHP if desired.
 * v12.0.1 - Sort issue with show_pages addressed.
+* v12.0.2 - Sort order with show_pages (uasort) addressed.

@@ -9,7 +9,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 
 ===== */ 
 	
-	/* =====  version 12.0.1 ===== */ 
+	/* =====  version 12.0.2 ===== */ 
 
 	/* ===== set up options ===== */ 
 	extract(shortcode_atts(array(
@@ -135,7 +135,8 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			$tags = get_categories('order=ASC&hide_empty='.$show_empty.'');
 		}	
 	} elseif($show_pages == "yes"){
-		$tags = get_pages('sort_order=DESC&hide_empty='.$show_empty.'');
+		//$tags = get_pages('sort_order=DESC&sort_column=post_title&hide_empty='.$show_empty.'');
+		$tags = get_pages(array('sort_order' => 'asc', 'sort_column' => 'post_title', 'post_status' => 'publish'));
 	} elseif($from_category){
 		$tags = array();
 		$posts_array = get_posts('category='.$from_category.'&numberposts=-1');
@@ -351,7 +352,11 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			$i = 0;
 	
 			/* ===== this helps sort non-english characters ===== */ 
-			uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
+			if($show_pages == "yes"){
+				uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->post_title, $b->post_title);') ); // addded 09.02.11
+			} else {
+				uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
+			}
 
 			foreach( $tags as $tag ) {
 				/* =====  exclude tags ===== */ 
@@ -463,7 +468,12 @@ file in the plugins folder, all your edits will be overwritten if you update.
 		$list .="\n";			
 		$i = 0;
 		
-		uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') );
+		/* ===== this helps sort non-english characters ===== */ 
+		if($show_pages == "yes"){
+			uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->post_title, $b->post_title);') ); // addded 09.02.11
+		} else {
+			uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
+		}
 
 		foreach( $tags as $tag ) {
 			/* =====  exclude tags ===== */ 
@@ -542,7 +552,12 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			$list .= '<ul class="links">';
 			$list .="\n";		
 	
-			uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') );	
+			/* ===== this helps sort non-english characters ===== */ 
+			if($show_pages == "yes"){
+				uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->post_title, $b->post_title);') ); // addded 09.02.11
+			} else {
+				uasort( $tags, create_function('$a, $b', 'return strnatcasecmp($a->name, $b->name);') ); // addded 09.02.11
+			}	
 			foreach($tags as $tag){
 				if(isset($tag->$arraypart)){
 					if($tag_count == "yes" && $show_pages != "yes"){
