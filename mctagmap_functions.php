@@ -9,7 +9,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 
 ===== */ 
 	
-	/* =====  version 12.0.2 ===== */ 
+	/* =====  version 12.0.3 ===== */ 
 
 	/* ===== set up options ===== */ 
 	extract(shortcode_atts(array(
@@ -50,9 +50,11 @@ file in the plugins folder, all your edits will be overwritten if you update.
 		$show_empty = "1";
 	}
 	
+	$tug_width = '';
 	if($width){
 		$tug_width = "style=\"width: ". $width ."px;\"";
 	}
+	$equalize = '';
 	if($equal == "yes" && $columns != "1"){ 
 		$equalize = 'mcEqualize';
 	}
@@ -61,7 +63,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 	} else {
 		$toggable = "toggleNo";
 	}
-
+	
 	/* ===== show settings for debug purposes ===== */ 
 	if(isset($_REQUEST[base64_decode('dHVnYWRtaW4=')])){ 
 		$childof = preg_replace('/\s+/', '', explode(',',$child_of));
@@ -362,6 +364,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 				/* =====  exclude tags ===== */ 
 				if(isset($tag->$arraypart)){
 					/* =====  tag count ===== */ 
+					$mctagmap_count = '';
 					if($tag_count == "yes" && $show_pages != "yes"){
 						$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
 					}
@@ -374,14 +377,15 @@ file in the plugins folder, all your edits will be overwritten if you update.
 						$url = get_page_link($tag->ID); 
 						$pex = mctm_get_the_excerpt_here($tag->ID);
 					} elseif($from_category){
-						$url = attribute_escape( get_tag_link( $tag->term_id ) ).'?mctmCatId='.$from_category.'&mctmTag='.$tag->slug; 
+						$url =esc_attr( get_tag_link( $tag->term_id ) ).'?mctmCatId='.$from_category.'&mctmTag='.$tag->slug; 
 					} else {
-						$url = attribute_escape( get_tag_link( $tag->term_id ) ); 
+						$url =esc_attr( get_tag_link( $tag->term_id ) ); 
 					}
 		
 					$name = apply_filters( 'the_title', $tag->$arraypart );
 					
 					/* =====  show descriptions / excerpts ===== */ 
+					$mctagmap_description = '';
 					if($descriptions == "yes"){
 						$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
 					}
@@ -419,7 +423,11 @@ file in the plugins folder, all your edits will be overwritten if you update.
 		 
 			$list .= '</ul>';
 			$list .="\n";
-			$list .= '</div>';
+			
+			/* fixing the extra div if there are less tags than columns */			
+			if(count($groups) - $columns > 0 && $columns != 1){
+				$list .= '</div>';
+			}
 			
 			/* =====  close the columns ===== */ 
 			$list .="\n\n";
@@ -447,6 +455,8 @@ file in the plugins folder, all your edits will be overwritten if you update.
 /* ==================== manual  settings ==================== */
 
 	if($manual && $basic == "no"){
+		$endManual = '';
+		$marginEh = '';
 		$list .= "\n<div class='holdleft' ". $tug_width .">\n";
 		$manualCount = 1;
 		foreach( $groups as $letter => $tags ) {	
@@ -478,6 +488,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 		foreach( $tags as $tag ) {
 			/* =====  exclude tags ===== */ 
 			if(isset($tag->$arraypart)){
+			$mctagmap_count = '';
 			if($tag_count == "yes" && $show_pages != "yes"){
 				$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
 			}
@@ -490,12 +501,13 @@ file in the plugins folder, all your edits will be overwritten if you update.
 				$url = get_page_link($tag->ID); 
 				$pex = mctm_get_the_excerpt_here($tag->ID);
 			} else {
-				$url = attribute_escape( get_tag_link( $tag->term_id ) ); 
+				$url =esc_attr( get_tag_link( $tag->term_id ) ); 
 			}
 		
 			$name = apply_filters( 'the_title', $tag->$arraypart );
 			
 			/* =====  show descriptions / excerpts ===== */ 
+			$mctagmap_description = '';
 			if($descriptions == "yes"){
 				$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
 			}
@@ -539,7 +551,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 	if($basic == "yes"){
 		$sum = 0 - count(explode(',', $exclude));
 		foreach($tags as $tag){
-			$sum += $tag;
+			$sum += count($tag);
 		}
 		$basicCount = 1;
 		$list .= "\n<div class='holdleft' ". $tug_width .">\n";				
@@ -560,6 +572,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			}	
 			foreach($tags as $tag){
 				if(isset($tag->$arraypart)){
+					$mctagmap_count = '';
 					if($tag_count == "yes" && $show_pages != "yes"){
 						$mctagmap_count = ' <span class="mctagmap_count">('.$tag->count.')</span>';
 					}
@@ -572,10 +585,11 @@ file in the plugins folder, all your edits will be overwritten if you update.
 						$url = get_page_link($tag->ID); 
 						$pex = mctm_get_the_excerpt_here($tag->ID);
 					} else {
-						$url = attribute_escape( get_tag_link( $tag->term_id ) ); 
+						$url =esc_attr( get_tag_link( $tag->term_id ) ); 
 					}
 		
 					$name = apply_filters( 'the_title', $tag->$arraypart );
+					$mctagmap_description = '';
 					if($descriptions == "yes"){
 						$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';
 					}

@@ -1,12 +1,12 @@
 === Multi-column Tag Map ===
 Contributors: tugbucket
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GX8RH7F2LR74J
-Tags: tags, lists, expandable, column, alphabetical, toggleable, site map, index, appendix, glossary
+Tags: tags, lists, expandable, column, alphabetical, toggleable, index, appendix, glossary, tag cloud alternative
 Requires at least: 2.1
 Tested up to: 3.5.1
-Stable tag: 12.0.2
+Stable tag: 12.0.3
 
-Multi-column Tag Map displays a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site.
+Multi-column Tag Map can display a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site.
 
 == Description ==
 
@@ -66,29 +66,29 @@ Multi-column Tag Map displays a columnized and alphabetical (English) listing of
 
 = Explanation of options =
 
-* columns: This sets the number of columns to display your tags in. NOTE: if you have less letters than your set number of columns, the plug in will end up inserting an extra closing tag. this will mess up your layout.
-* hide: This tells the list of tags for each letter to cut the list off at the point specified in the 'num_show' option.
-* num_show: This tells the plug-in how many list items to show on page load.
-* more: This will be the text of the link to dispaly more links. Only visible if 'hide' is set to 'yes' and 'num_show' is less than the total number of tags shown in each list.
-* toggle: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
-* show_empty: If set to 'yes', this will display tags in the lists that currently do not have posts associated with them. NOTE: If a post is set to private the tag will still show up in the list but, clicking the link will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
-* name_divider: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.
-* tag_count: If this option is set to "yes", the number of posts that share that tag will be displayed like "(3)". The count is wrapped in a span with a class of "mctagmap_count" so that the count can be styled individually in the CSS if desired. 
-* exclude: A coma seperated, case sensitive list of the tags you do not wish to appear in the lists.
-* descriptions: If set to yes, the plugin will create a span and populate it with the tags description. By default the text is set to 90% italics.
-* width: The default width (190px) can be set in the shortcode without any need to alter the CSS. 
-* equal: What this does is makes the horizontal sections equal height based on the tallest in the row. This is only recommended if you are using the "hide" option. Look at the first image in the screenshots page for a better example. 
-* manual: Each letter will create the begining of a new column. Exmple: 'manual="e, h, t".' This will create four columns (a-d, e-g, h-s and t-z+numbers). Writing "a, e, h, t" will have the same effect. The "columns" option is ignored as the "manual" setting over rides it.
-* basic: This removes all the alphanumeric headings. It then splits your columns by the number of tags rather than the number of headings. See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"The 'basic' option"</a>. The "more", "hide", "num_show", "toggle", and "equal" are ignored when using the "basic" option.
-* basic_heading: Turns the letter headings on or off in the basic mode.
-* show_categories: if set to "yes", the plugin will list categories instead of tags.
-* taxonomy: If you enter a taxonomy, the plugin will only display tags from that taxonomy.
-* group_numbers: If set to "yes", this will group all tags beginning with a number together. They will then be put under one heading of "#" in the list.
-* show_navigation: If set to "yes", a div will be added before your lists with jump links to the corresponding heading. See screen shot #7.
-* child_of: if show_categories is set to "yes", you can input a comma delimited list of category IDs eg, "2, 215, 209" and so on. 
-* from_category: You can enter a single numeric ID of a category and it will only sort tags from that category. See "Theme Addition" under Additional Options.
-* show_pages: If set to "yes" this will list pages instead of tags.
-* page_excerpt: If set to yes and you have set a page excerpt, this will display the excerpt in the same way you can display tag descriptions.
+* *columns*: This sets the number of columns to display your tags in. *NOTE*: if you have less letters than your set number of columns, the plug in will end up inserting an extra closing tag. this will mess up your layout. *as of v12.0.3, this should not be an issue*
+* *hide*: This tells the list of tags for each letter to cut the list off at the point specified in the 'num_show' option.
+* *num_show*: This tells the plug-in how many list items to show on page load.
+* *more*: This will be the text of the link to dispaly more links. Only visible if 'hide' is set to 'yes' and 'num_show' is less than the total number of tags shown in each list.
+* *toggle*: If set to anything except 'no', this will tell the 'more' link to become a toggle link. The text you set for 'toggle' will be the 'hide' link text.
+* *show_empty*: If set to 'yes', this will display tags in the lists that currently do not have posts associated with them. *NOTE*: If a post is set to private the tag will still show up in the list but, clicking the link will go to an empty archive unless the user is logged in. This is the same behavoir as clicking a tag link where there is no post to go to. This is not a bug.
+* *name_divider*: This allows for multi-word tags to be sorted by words other than the first word eg. "Edgar Allen Poe" would be sorted under the "E"s. If you write your tag "Edgar Allen | Poe" it will now produce "Poe, Edgar Allen" and be sorted with the "P"s.
+* *tag_count*: If this option is set to "yes", the number of posts that share that tag will be displayed like "(3)". The count is wrapped in a span with a class of "mctagmap_count" so that the count can be styled individually in the CSS if desired. 
+* *exclude*: A comma seperated, case sensitive list of the tags you do not wish to appear in the lists.
+* *descriptions*: If set to yes, the plugin will create a span and populate it with the tags description. By default the text is set to 90% italics.
+* *width*: The default width (190px) can be set in the shortcode without any need to alter the CSS. 
+* *equal*: What this does is makes the horizontal sections equal height based on the tallest in the row. This is only recommended if you are using the "hide" option. Look at the first image in the <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">screenshots page</a> for a better example. 
+* *manual*: Each letter will create the begining of a new column. Exmple: 'manual="e, h, t".' This will create four columns (a-d, e-g, h-s and t-z+numbers). Writing "a, e, h, t" will have the same effect. The "columns" option is ignored as the "manual" setting creates the columns based on your input.
+* *basic*: This removes all the alphanumeric headings. It then splits your columns by the number of tags rather than the number of headings. See screenshot <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">"The 'basic' option"</a>. The "more", "hide", "num_show", "toggle", and "equal" are ignored when using the "basic" option.
+* *basic_heading*: Turns the alphanumeric headings on or off in the basic mode.
+* *show_categories*: if set to "yes", the plugin will list categories instead of tags.
+* *taxonomy*: If you enter a taxonomy, the plugin will only display tags from that taxonomy.
+* *group_numbers*: If set to "yes", this will group all tags beginning with a number together. They will then be put under one heading of "#" in the list.
+* *show_navigation*: If set to "yes", a div will be added before your lists with jump links to the corresponding heading. See <a href=\"http://wordpress.org/extend/plugins/multi-column-tag-map/screenshots/\">screen shot #7</a>.
+* *child_of*: if show_categories is set to "yes", you can input a comma delimited list of category IDs eg, "2, 215, 209" and so on. 
+* *from_category*: You can enter a single numeric ID of a category and it will only sort tags from that category. *See "Theme Addition" under Additional Options*.
+* *show_pages*: If set to "yes" this will list pages instead of tags.
+* *page_excerpt*: If set to yes and you have set a page excerpt, this will display the excerpt in the same way you can display tag descriptions.
 
 = Note =
 You must be using jQuery in order to use the show, hide and equal feature.
@@ -97,10 +97,10 @@ You must be using jQuery in order to use the show, hide and equal feature.
 * If you wish to make CSS changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.css" into that folder. There you can make style changes that will not be overwritten when you update the mctagmap plugin.
 * If you wish to make JavaScript changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap.js" into that folder. There you can make JavaScript changes that will not be overwritten when you update the mctagmap plugin.
 * If you wish to make PHP changes, make a folder named "multi-column-tag-map" in your theme's directory. Move a copy of the plugin's "mctagmap_functions.php" into that folder. There you can make PHP changes that will not be overwritten when you update the mctagmap plugin.
-* There is a reverse exclude feature. You can add exclude="&#42;!er" and will only list tags that include "er" in them. Example: exclude="&#42;!tion" will show only tags that include "tion" and so on. You can only use one exclude this way.
+* There is a reverse exclude feature. You can add exclude="&#42;!er" and will only list tags that include "er" in them. Example: exclude="&#42;!tion" will show only tags that include "tion" and so on. You can only use one reverse exclude this way.
 
 = Theme Addition =
-If you are using the "from_category" option, you will have to modify your theme to display the tag archives correctly. Below is an example of what you can try before your loop in your themes tag archive page. In my test theme, there is a "tag.php" file that displays the archives for tags.  Each theme can be totally different so this is only an example. I can not give specific advice on how to implement this on any specific theme. 
+If you are using the "from_category" option, you will have to modify your theme to display the tag archives correctly. Below is an example of what you can try before your loop in your themes tag archive page. In my test theme, there is a "tag.php" file that displays the archives for tags.  Each theme can be totally different so this is only an example. *I can not give specific advice on how to implement this on any specific theme*. 
 `
 <?php if(isset($_GET['mctmCatId']) && isset($_GET['mctmTag'])){
 query_posts('cat='.$_GET['mctmCatId'].'&tag='.$_GET['mctmTag']);
@@ -109,13 +109,13 @@ query_posts('cat='.$_GET['mctmCatId'].'&tag='.$_GET['mctmTag']);
 
 == Frequently Asked Questions ==
 
-= The plugin doesn't work correctly in [non-english] language, can you fix it? =
+= The plugin doesn't work correctly in [insert non-english] language, can you fix it? =
 
 Currently the plugin only displays and groups non-English words. It does not sort these words alphabetically. If someone would like to help translate it into another language, it would be appreciated.
 
 = Does the plugin work in [insert theme name]? =
 
-mctagmap does nothing to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shouldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the hierarchy of your themes CSS but, that can be changed by editing the mctagmap.css in the plugins folder.
+mctagmap does nothing to the core functions of Wordpress. There should be no reason that a theme changes the default functions as to how Wordpress handles tags. Knowing that, there shouldn't be any reason why the plugin does not work in your theme. The CSS might get overwritten due the the hierarchy of your themes CSS but, that can be changed by editing the mctagmap.css.
 
 = The map is displaying in a "stair case" fashion =
 
@@ -129,7 +129,7 @@ Please remove that. That should fix it up.
 
 = Can the plugin include tags from [insert plugin name]? =
 
-Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins (NextGen, The Events Calendar, etc...) create tags but, they are not stored in the databse the same way as Wordpress does. Combing those tags into Multi-column Tag Map is possible but, any method of doing this is a hack and is not supported out of the box. I will not add this functionality to the plugin as a default since I have no control over the other plugins and can not make any guarantee that the other plugins will not change how they structure and handle tags in the future.
+Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins (NextGen, The Events Calendar, etc...) create tags but, they are not stored in the database the same way as Wordpress does. Combining those tags into Multi-column Tag Map is possible but, any method of doing this is a hack and is not supported out of the box. I will not add this functionality to the plugin as a default since I have no control over the other plugins and cannot make any guarantee that the other plugins will not change how they structure and handle tags in the future.
 
 
 == Screenshots ==
@@ -170,4 +170,5 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 * v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
 * v12.0 - Fixed the numberposts issue for showing categories. Fixed the way scripts were loaded for SSL use. Fixed the "flatten" function conflict. You can now use your own CSS, JS and PHP if desired.
 * v12.0.1 - Sort issue with show_pages addressed.
-* v12.0.2 - Sort order with show_pages (uasort) addressed.
+* v12.0.2 - Sort issue with show_pages (uasort) addressed.
+* v12.0.3 - Cleaned up some PHP notifications from undeclared variables, replaced attribute_escape() with esc_attr() and eliminated the extra div issue when there are more columns assigned than tags availabble.
