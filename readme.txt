@@ -144,31 +144,56 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 
 == Changelog ==
 
-* v1.2 - Updated the plugin PHP to correct the CSS path.
-* v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
-* v2.0 - Added shortcode functionality.
-* v2.1 - Fixed a sorting coflict with the defaults.
-* v2.2 - Fixed shorcode placement issue.
-* v3.0 - Added toggleability to the lists, the ability to show empty posts and the ability to use special characters in the links.
-* v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
-* v4.0.1 - Typos
-* v4.1 - oops
-* v4.2 - Fixed function conflict and added to the FAQ.
-* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option.
-* v5.1 - cleaned up the tag_count function.
-* v6.0 - Added language display support and the ability to exclude tags.
-* v6.0.1 - upload error. 
-* v6.0.2 - upload error. 
-* v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
-* v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.
-* v9.0 - Added the "manual", "basic" and "basic_heading" options.
-* v10.0 - Removed the old hardcode version completely. Options "show_categories". "taxonomy", "group_numbers", and "show_navigation" added.
-* v10.0.1 - Fixed "show_navigation" issue
-* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerpt", "&#42;!", "from_category", "child_of"
-* v11.0.1 - Corrected plugin conflict.
-* v11.0.2 - Fixed show_categories and tuned a PHP 4.x issue.
-* v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
-* v12.0 - Fixed the numberposts issue for showing categories. Fixed the way scripts were loaded for SSL use. Fixed the "flatten" function conflict. You can now use your own CSS, JS and PHP if desired.
-* v12.0.1 - Sort issue with show_pages addressed.
-* v12.0.2 - Sort issue with show_pages (uasort) addressed.
 * v12.0.3 - Cleaned up some PHP notifications from undeclared variables, replaced attribute_escape() with esc_attr() and eliminated the extra div issue when there are more columns assigned than tags availabble.
+* v12.0.2 - Sort issue with show_pages (uasort) addressed.
+* v12.0.1 - Sort issue with show_pages addressed.
+* v12.0 - Fixed the numberposts issue for showing categories. Fixed the way scripts were loaded for SSL use. Fixed the "flatten" function conflict. You can now use your own CSS, JS and PHP if desired.
+* v11.0.3 - Fixed a duplicate problem and archives issue on "from_category"
+* v11.0.2 - Fixed show_categories and tuned a PHP 4.x issue.
+* v11.0.1 - Corrected plugin conflict.
+* v11.0 - Fixed a PHP 4 issue, added "show_pages", "page_excerpt", "&#42;!", "from_category", "child_of"
+* v10.0.1 - Fixed "show_navigation" issue.
+* v10.0 - Removed the old hardcode version completely. Options "show_categories". "taxonomy", "group_numbers", and "show_navigation" added.
+* v9.0 - Added the "manual", "basic" and "basic_heading" options.
+* v8.0 - Added the ability to equalize the heights of the individual letters sections, the use of a custom CSS within the theme's folder and added to the FAQ.
+* v7.0 - Added the ablity to display tag descriptions and set the column width in the shortcode. Cleaned up some of the code that was being inserted in the head section.
+* v6.0.2 - upload error. 
+* v6.0.1 - upload error. 
+* v6.0 - Added language display support and the ability to exclude tags.
+* v5.1 - cleaned up the tag_count function.
+* v5.0 - Fixed a small issue with the name_divider addition. Added the tag_count option.
+* v4.2 - Fixed function conflict and added to the FAQ.
+* v4.1 - oops
+* v4.0.1 - Typos
+* v4.0 - Deprecated hardcode support. Added name_divider shortcode option.
+* v3.0 - Added toggleability to the lists, the ability to show empty posts and the ability to use special characters in the links.
+* v2.2 - Fixed shorcode placement issue.
+* v2.1 - Fixed a sorting coflict with the defaults.
+* v2.0 - Added shortcode functionality.
+* v1.3.1 - Fixed a conflict in jQuery for the show/hide to work.
+* v1.2 - Updated the plugin PHP to correct the CSS path.
+* v1.0 - It's a boy!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
