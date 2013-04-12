@@ -9,7 +9,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 
 ===== */ 
 	
-	/* =====  version 12.0.3 ===== */ 
+	/* =====  version 12.0.4 ===== */ 
 
 	/* ===== set up options ===== */ 
 	extract(shortcode_atts(array(
@@ -347,7 +347,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			/* =====  start bulding the individual lists for each letter ===== */ 
 			$list .= '<div class="tagindex">';
 			$list .="\n";
-			$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter ) . '</h4>';
+			$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter, null ) . '</h4>';
 			$list .="\n";
 			$list .= '<ul class="links">';
 			$list .="\n";			
@@ -382,7 +382,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 						$url =esc_attr( get_tag_link( $tag->term_id ) ); 
 					}
 		
-					$name = apply_filters( 'the_title', $tag->$arraypart );
+					$name = apply_filters( 'the_title', $tag->$arraypart, null );
 					
 					/* =====  show descriptions / excerpts ===== */ 
 					$mctagmap_description = '';
@@ -460,7 +460,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 		$list .= "\n<div class='holdleft' ". $tug_width .">\n";
 		$manualCount = 1;
 		foreach( $groups as $letter => $tags ) {	
-			foreach(array(strtoupper(apply_filters('the_title', $letter))) as $qw) { 
+			foreach(array(strtoupper(apply_filters('the_title', $letter, null))) as $qw) { 
 				if(in_array($qw, $manualArray)){
 					if($manualCount == count($manualArray)){
 						$marginEh = "noMargin";
@@ -472,7 +472,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 			}
 		$list .= '<div class="tagindex">';
 		$list .="\n";
-		$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter ) . '</h4>';
+		$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter, null ) . '</h4>';
 		$list .="\n";
 		$list .= '<ul class="links">';
 		$list .="\n";			
@@ -504,7 +504,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 				$url =esc_attr( get_tag_link( $tag->term_id ) ); 
 			}
 		
-			$name = apply_filters( 'the_title', $tag->$arraypart );
+			$name = apply_filters( 'the_title', $tag->$arraypart, null );
 			
 			/* =====  show descriptions / excerpts ===== */ 
 			$mctagmap_description = '';
@@ -559,7 +559,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 		$list .="\n";	
 		foreach( $groups as $letter => $tags ) {
 			if($basic_heading == 'yes'){
-				$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter ) . '</h4>'."\n";
+				$list .='<h4 id="mctm-'.$letter.'">' . apply_filters( 'the_title', $letter, null ) . '</h4>'."\n";
 			}
 			$list .= '<ul class="links">';
 			$list .="\n";		
@@ -588,7 +588,7 @@ file in the plugins folder, all your edits will be overwritten if you update.
 						$url =esc_attr( get_tag_link( $tag->term_id ) ); 
 					}
 		
-					$name = apply_filters( 'the_title', $tag->$arraypart );
+					$name = apply_filters( 'the_title', $tag->$arraypart, null );
 					$mctagmap_description = '';
 					if($descriptions == "yes"){
 						$mctagmap_description = '<span class="tagDescription">' . $tag->description . '</span>';

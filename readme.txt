@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: tags, lists, expandable, column, alphabetical, toggleable, index, appendix, glossary, tag cloud alternative
 Requires at least: 2.1
 Tested up to: 3.5.1
-Stable tag: 12.0.3
+Stable tag: 12.0.4
 
 Multi-column Tag Map can display a columnized and alphabetical (English) listing of all tags, categories, pages or single taxonomies used in your site.
 
@@ -66,7 +66,7 @@ Multi-column Tag Map displays a columnized and alphabetical (English) listing of
 
 = Explanation of options =
 
-* **columns**: This sets the number of columns to display your tags in. **NOTE**: if you have less letters than your set number of columns, the plug in will end up inserting an extra closing tag. this will mess up your layout. **as of v12.0.3, this should not be an issue**
+* **columns**: This sets the number of columns to display your tags in. **NOTE**: if you have less letters than your set number of columns, the plug in will end up inserting an extra closing tag. this will mess up your layout. **as of v12.0.4, this should not be an issue**
 * **hide**: This tells the list of tags for each letter to cut the list off at the point specified in the 'num_show' option.
 * **num_show**: This tells the plug-in how many list items to show on page load.
 * **more**: This will be the text of the link to dispaly more links. Only visible if 'hide' is set to 'yes' and 'num_show' is less than the total number of tags shown in each list.
@@ -144,6 +144,7 @@ Multi-column Tag Map looks for the tags created by Wordpress. Most other plugins
 
 == Changelog ==
 
+* v12.0.4 - Added a fix to the errors with the "Standard" theme's functions.php
 * v12.0.3 - Cleaned up some PHP notifications from undeclared variables, replaced attribute_escape() with esc_attr() and eliminated the extra div issue when there are more columns assigned than tags availabble.
 * v12.0.2 - Sort issue with show_pages (uasort) addressed.
 * v12.0.1 - Sort issue with show_pages addressed.
